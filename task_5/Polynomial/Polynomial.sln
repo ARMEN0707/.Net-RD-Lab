@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polynomial", "Polynomial\Polynomial.csproj", "{FAFEFF35-B580-4797-99B6-4B1B9ADF198C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polynomial.Test", "Polynomial.Test\Polynomial.Test.csproj", "{B358E473-7C92-4906-82DF-6E2FE8E35CA9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FAFEFF35-B580-4797-99B6-4B1B9ADF198C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAFEFF35-B580-4797-99B6-4B1B9ADF198C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAFEFF35-B580-4797-99B6-4B1B9ADF198C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAFEFF35-B580-4797-99B6-4B1B9ADF198C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B358E473-7C92-4906-82DF-6E2FE8E35CA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B358E473-7C92-4906-82DF-6E2FE8E35CA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B358E473-7C92-4906-82DF-6E2FE8E35CA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B358E473-7C92-4906-82DF-6E2FE8E35CA9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {18C04848-75B0-4F1C-88E7-40C198CE0F44}
+	EndGlobalSection
+EndGlobal
