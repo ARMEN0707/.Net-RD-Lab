@@ -1,0 +1,13 @@
+C:\VisualStudio\.Net_RD_Lab\task_7\task_7\bin\Debug\netcoreapp3.1\task_7.exe
+C:\VisualStudio\.Net_RD_Lab\task_7\task_7\bin\Debug\netcoreapp3.1\task_7.deps.json
+C:\VisualStudio\.Net_RD_Lab\task_7\task_7\bin\Debug\netcoreapp3.1\task_7.runtimeconfig.json
+C:\VisualStudio\.Net_RD_Lab\task_7\task_7\bin\Debug\netcoreapp3.1\task_7.runtimeconfig.dev.json
+C:\VisualStudio\.Net_RD_Lab\task_7\task_7\bin\Debug\netcoreapp3.1\task_7.dll
+C:\VisualStudio\.Net_RD_Lab\task_7\task_7\bin\Debug\netcoreapp3.1\task_7.pdb
+C:\VisualStudio\.Net_RD_Lab\task_7\task_7\obj\Debug\netcoreapp3.1\task_7.csproj.AssemblyReference.cache
+C:\VisualStudio\.Net_RD_Lab\task_7\task_7\obj\Debug\netcoreapp3.1\task_7.AssemblyInfoInputs.cache
+C:\VisualStudio\.Net_RD_Lab\task_7\task_7\obj\Debug\netcoreapp3.1\task_7.AssemblyInfo.cs
+C:\VisualStudio\.Net_RD_Lab\task_7\task_7\obj\Debug\netcoreapp3.1\task_7.csproj.CoreCompileInputs.cache
+C:\VisualStudio\.Net_RD_Lab\task_7\task_7\obj\Debug\netcoreapp3.1\task_7.dll
+C:\VisualStudio\.Net_RD_Lab\task_7\task_7\obj\Debug\netcoreapp3.1\task_7.pdb
+C:\VisualStudio\.Net_RD_Lab\task_7\task_7\obj\Debug\netcoreapp3.1\task_7.genruntimeconfig.cache

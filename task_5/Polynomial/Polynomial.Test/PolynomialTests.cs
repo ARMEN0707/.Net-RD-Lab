@@ -126,10 +126,5 @@ namespace Polynomial.Test
                 var value = polynomial[index];
             });
 
-        [TestCaseSource(typeof(TestCasesData), nameof(TestCasesData.TestCasesForCalculateValue))]
-        public void CalculateValueReturnValueInPoint(Polynomial polynomial, double x, double value)
-        {
-            Assert.AreEqual(value, polynomial.CalculateValue(x), Polynomial.s_Epsilon);
-        }
     }
 }

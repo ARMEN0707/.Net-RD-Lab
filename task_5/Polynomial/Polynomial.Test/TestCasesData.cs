@@ -40,33 +40,6 @@ namespace Polynomial.Test
             }
         }
 
-        public static IEnumerable<TestCaseData> TestCasesForToString
-        {
-            get
-            {
-                yield return new TestCaseData(new Polynomial(new[] { 0.0001, -0.003, 0.31, -0.00731, 0.000402, 0.000300021 }))
-                    .Returns("0,000300021*x^5+0,000402*x^4-0,00731*x^3+0,31*x^2-0,003*x+0,0001");
-                yield return new TestCaseData(new Polynomial(new[] { -1, 0.2, 3.313, 0.004, 0.05, 0.16 }))
-                    .Returns("0,16*x^5+0,05*x^4+0,004*x^3+3,313*x^2+0,2*x-1");
-                yield return new TestCaseData(new Polynomial(new[] { -1.1, 2.42, -0.0957, -2.2242, 10.0991, -14.498, -0.2046, 0.308, -0.704 }))
-                    .Returns("-0,704*x^8+0,308*x^7-0,2046*x^6-14,498*x^5+10,0991*x^4-2,2242*x^3-0,0957*x^2+2,42*x-1,1");
-            }
-        }
-
-        public static IEnumerable<TestCaseData> TestCasesForGetHashCode
-        {
-            get
-            {
-                yield return new TestCaseData(new Polynomial(1d, 2d, 3d), new Polynomial(1d, 2d, 3d));
-                yield return new TestCaseData(new Polynomial(0.5), new Polynomial(0.4999999));
-                yield return new TestCaseData(new Polynomial(0, 0.1, 0.0001), new Polynomial(0, 0.1, 0.000100876));
-                yield return new TestCaseData(new Polynomial(-10.1230000432, 5.89), new Polynomial(-10.123, 5.89));
-                yield return new TestCaseData(new Polynomial(1d, 2d, 3d), new Polynomial(1d, 2d, 3d - double.Epsilon));
-                yield return new TestCaseData(new Polynomial(0, 0.1, 0.0001), new Polynomial(0, 0.1, 0.0001));
-                yield return new TestCaseData(new Polynomial(-10.123, 5.89), new Polynomial(-10.123, 5.8900023));
-            }
-        }
-
         public static IEnumerable<TestCaseData> TestCasesForMultiplication
         {
             get
@@ -136,16 +109,6 @@ namespace Polynomial.Test
             }
         }
 
-        public static IEnumerable<TestCaseData> TestCasesForClone
-        {
-            get
-            {
-                yield return new TestCaseData(new Polynomial(1.21394, 2.001, 3.3));
-                yield return new TestCaseData(new Polynomial(-1, 0.2, 3.313, 0.004, 0.05, 0.16));
-                yield return new TestCaseData(new Polynomial(-3, 0.014, 1.004, 0));
-            }
-        }
-
         public static IEnumerable<TestCaseData> TestCasesForIndexer
         {
             get
@@ -175,19 +138,6 @@ namespace Polynomial.Test
                 yield return new TestCaseData(new Polynomial(1.21394, 2.001, 3.3), null);
                 yield return new TestCaseData(null, new Polynomial(-1, 0.2, 3.313, 0.004, 0.05, 0.16));
                 yield return new TestCaseData(null, null);
-            }
-        }
-
-        public static IEnumerable<TestCaseData> TestCasesForCalculateValue
-        {
-            get
-            {
-                yield return new TestCaseData(new Polynomial(1.21394, 2.001, 3.3), -0.5, 1.03844);
-                yield return new TestCaseData(new Polynomial(-1, 0.2, 3.313, 0.004, 0.05, 0.16), -0.5, -0.274125);
-                yield return new TestCaseData(new Polynomial(3, 0.014, 1.004, 0), -0.5, 3.244);
-                yield return new TestCaseData(new Polynomial(1.21394, 2.001, 3.3), 1.5, 11.64044);
-                yield return new TestCaseData(new Polynomial(-1, 0.2, 3.313, 0.004, 0.05, 0.16), 1.5, 8.235875);
-                yield return new TestCaseData(new Polynomial(3, 0.014, 1.004, 0), 1.5, 5.28);
             }
         }
     }
