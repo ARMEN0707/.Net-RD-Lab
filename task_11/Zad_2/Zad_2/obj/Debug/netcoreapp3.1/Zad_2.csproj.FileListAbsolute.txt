@@ -1,0 +1,13 @@
+C:\VisualStudio\.Net_RD_Lab\task_11\Zad_2\Zad_2\bin\Debug\netcoreapp3.1\Zad_2.exe
+C:\VisualStudio\.Net_RD_Lab\task_11\Zad_2\Zad_2\bin\Debug\netcoreapp3.1\Zad_2.deps.json
+C:\VisualStudio\.Net_RD_Lab\task_11\Zad_2\Zad_2\bin\Debug\netcoreapp3.1\Zad_2.runtimeconfig.json
+C:\VisualStudio\.Net_RD_Lab\task_11\Zad_2\Zad_2\bin\Debug\netcoreapp3.1\Zad_2.runtimeconfig.dev.json
+C:\VisualStudio\.Net_RD_Lab\task_11\Zad_2\Zad_2\bin\Debug\netcoreapp3.1\Zad_2.dll
+C:\VisualStudio\.Net_RD_Lab\task_11\Zad_2\Zad_2\bin\Debug\netcoreapp3.1\Zad_2.pdb
+C:\VisualStudio\.Net_RD_Lab\task_11\Zad_2\Zad_2\obj\Debug\netcoreapp3.1\Zad_2.csproj.AssemblyReference.cache
+C:\VisualStudio\.Net_RD_Lab\task_11\Zad_2\Zad_2\obj\Debug\netcoreapp3.1\Zad_2.AssemblyInfoInputs.cache
+C:\VisualStudio\.Net_RD_Lab\task_11\Zad_2\Zad_2\obj\Debug\netcoreapp3.1\Zad_2.AssemblyInfo.cs
+C:\VisualStudio\.Net_RD_Lab\task_11\Zad_2\Zad_2\obj\Debug\netcoreapp3.1\Zad_2.csproj.CoreCompileInputs.cache
+C:\VisualStudio\.Net_RD_Lab\task_11\Zad_2\Zad_2\obj\Debug\netcoreapp3.1\Zad_2.dll
+C:\VisualStudio\.Net_RD_Lab\task_11\Zad_2\Zad_2\obj\Debug\netcoreapp3.1\Zad_2.pdb
+C:\VisualStudio\.Net_RD_Lab\task_11\Zad_2\Zad_2\obj\Debug\netcoreapp3.1\Zad_2.genruntimeconfig.cache
