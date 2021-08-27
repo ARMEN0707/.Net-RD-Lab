@@ -72,7 +72,23 @@ namespace Task_4
         {
             static void Main()
             {
+                try
+                {
+                    Console.Write("Enter SideA: ");
+                    double sideA = double.Parse(Console.ReadLine());
+                    Console.Write("Enter SideB: ");
+                    double sideB = double.Parse(Console.ReadLine());
+                    Console.Write("Enter SideC: ");
+                    double sideC = double.Parse(Console.ReadLine());
 
+                    Treangle treangle = new Treangle(sideA, sideB, sideC);
+                    Console.WriteLine("Square: " + treangle.Square());
+                    Console.WriteLine("Perimetr: " + treangle.Perimeter());
+                }
+                catch(ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
 
