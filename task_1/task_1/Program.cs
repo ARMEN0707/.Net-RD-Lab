@@ -1,14 +1,50 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
+using System.Collections.Generic;
 
 namespace task_1
 {
+    public class Point
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+
+        public Point(string str)
+        {
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-us");
+            string[] numbers = str.Split(new char[] { ',' });
+            double x = 0, y = 0;
+
+            if (numbers.Length == 2)
+            {
+                if (!double.TryParse(numbers[0], NumberStyles.AllowDecimalPoint, culture, out x))
+                    throw new ArgumentException("Invalid data " + str);
+
+                if (!double.TryParse(numbers[1], NumberStyles.AllowDecimalPoint, culture, out y))
+                    throw new ArgumentException("Invalid data " + str);
+            }
+            else
+            {
+                throw new ArgumentException("Invalid data " + str);
+            }
+
+            X = x;
+            Y = y;
+        }
+
+        public override string ToString()
+        {
+            return "X: " + X + " Y: " + Y;
+        }
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
-            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-us");
+            List<Point> points = new List<Point>();
+
             try
             {
                 using (StreamReader sr = new StreamReader("InputData.txt"))
@@ -17,34 +53,18 @@ namespace task_1
                     while (!sr.EndOfStream)
                     {
                         str = sr.ReadLine();
-                        string[] numbers = str.Split(new char[] { ',' });
-
-                        if (numbers.Length == 2)
-                        {
-                            bool isCorrect = true;
-                            foreach (string number in numbers)
-                            {
-                                double num;
-                                if (!double.TryParse(number, NumberStyles.AllowDecimalPoint, culture, out num))
-                                {
-                                    isCorrect = false;
-                                    Console.WriteLine("Invalid data " + str);
-                                    break;
-                                }
-                            }
-                            if (isCorrect)
-                                Console.WriteLine("X: " + numbers[0] + " Y: " + numbers[1]);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid data " + str);
-                        }
+                        points.Add(new Point(str));
                     }
                 }
+
+                foreach (Point point in points)
+                {
+                    Console.WriteLine(point.ToString());
+                }
             }
-            catch
+            catch(ArgumentException ex)
             {
-                Console.WriteLine("File is not find.");
+                Console.WriteLine(ex.Message);
             }
 
             Console.ReadLine();
