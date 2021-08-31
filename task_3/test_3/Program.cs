@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace task_3
 {
-    public class EuclideanAlgorithm
+    public struct EuclideanAlgorithm
     {
         public int FindNodBinaryAlgorithm(int a, int b, out long time)
         {
