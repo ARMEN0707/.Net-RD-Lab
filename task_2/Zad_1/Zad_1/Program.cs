@@ -2,36 +2,41 @@
 
 namespace Zad_1
 {
-    class RootNumber
+    struct RootNumber
     {
-        private double _eps  = 0.0001;
+        private readonly double _eps;
 
         public double Eps
         {
             get { return _eps; }
-            set { _eps = value < 0 ? _eps = 0 : _eps = value; }
         }
 
         public RootNumber(double eps)
         {
-            Eps = eps;
+            _eps = eps;
         }
 
         public double Sqrt(double number, double degree)
         {
             double x0 = number / degree;            
-            double x1 = GetNumber(number, degree, x0);
+            double x1 = GetValue(number, degree, x0);
+
 
             while (Math.Abs(x1 - x0) > Eps)
             {
                 x0 = x1;
-                x1 = GetNumber(number, degree, x0);
+                x1 = GetValue(number, degree, x0);
             }
 
-            return x1;
+            double resultPow = Math.Pow(x1, degree);
+
+            if (Math.Abs(number - resultPow) < Eps)
+                return x1;               
+            else
+                throw new ArgumentException("Result don't equals Math.Pow()");
         }
 
-        private double GetNumber(double number, double degree, double x0) => (1 / degree) * ((degree - 1) * x0 + number / Math.Pow(x0, degree - 1));
+        private double GetValue(double number, double degree, double x0) => (1 / degree) * ((degree - 1) * x0 + number / Math.Pow(x0, degree - 1));
     }
 
     class Program
@@ -48,17 +53,17 @@ namespace Zad_1
             Console.Write("Enter eps: ");
             eps = GetNumber();
 
-            RootNumber rn = new RootNumber(eps);
-            double result = rn.Sqrt(number, degree);
-            double resultPow = Math.Pow(result, degree);
-            if (Math.Abs(number - resultPow) < rn.Eps)
+            try
             {
+                RootNumber rn = new RootNumber(eps);
+                double result = rn.Sqrt(number, degree);
                 Console.WriteLine("Result: " + result);
             }
-            else
+            catch(ArgumentException ex)
             {
-                Console.WriteLine("Result don't equals Math.Pow()");
+                Console.WriteLine(ex.Message);
             }
+
             Console.ReadKey();
         }
 
