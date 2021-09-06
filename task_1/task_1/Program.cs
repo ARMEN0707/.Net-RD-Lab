@@ -5,68 +5,108 @@ using System.Collections.Generic;
 
 namespace task_1
 {
-    public class Point
-    {
-        public double X { get; set; }
-        public double Y { get; set; }
-
-        public Point(string str)
-        {
-            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-us");
-            string[] numbers = str.Split(new char[] { ',' });
-            double x = 0, y = 0;
-
-            if (numbers.Length == 2)
-            {
-                if (!double.TryParse(numbers[0], NumberStyles.AllowDecimalPoint, culture, out x))
-                    throw new ArgumentException("Invalid data " + str);
-
-                if (!double.TryParse(numbers[1], NumberStyles.AllowDecimalPoint, culture, out y))
-                    throw new ArgumentException("Invalid data " + str);
-            }
-            else
-            {
-                throw new ArgumentException("Invalid data " + str);
-            }
-
-            X = x;
-            Y = y;
-        }
-
-        public override string ToString()
-        {
-            return "X: " + X + " Y: " + Y;
-        }
-    }
-
     class Program
     {
+        static double GetNumericValueDouble(string str)
+        {
+            double number;
+            if (!Double.TryParse(str, NumberStyles.AllowDecimalPoint, CultureInfo.CreateSpecificCulture("en-us"), out number))
+                throw new ArgumentException("Invalid data " + str);
+
+            return number;
+        }
+
+        static int GetNumericValueInt(string str)
+        {
+            int number;
+            if (!Int32.TryParse(str, NumberStyles.AllowDecimalPoint, CultureInfo.CreateSpecificCulture("en-us"), out number))
+                throw new ArgumentException("Invalid data " + str);
+
+            return number;
+        }
+
         static void Main(string[] args)
         {
+            int choose;
             List<Point> points = new List<Point>();
 
             try
             {
-                using (StreamReader sr = new StreamReader("InputData.txt"))
+                while (true)
                 {
-                    string str;
-                    while (!sr.EndOfStream)
+                    while (true)
                     {
-                        str = sr.ReadLine();
-                        points.Add(new Point(str));
+                        Console.WriteLine("1-Read points from a file");
+                        Console.WriteLine("2-Write a points in the file");
+                        Console.WriteLine("3-Enter point");
+                        Console.WriteLine("4-Print points");
+                        Console.WriteLine("5-Exit");
+                        choose = GetNumericValueInt(Console.ReadLine());
+                        if (choose < 1 || choose > 5)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Invalid data");
+                            Console.ReadKey();
+                        }
+                        else
+                            break;
                     }
-                }
 
-                foreach (Point point in points)
-                {
-                    Console.WriteLine(point.ToString());
+                    Console.Clear();
+
+                    switch(choose)
+                    {
+                        case 1:
+                            using (StreamReader reader = new StreamReader("InputData.txt"))
+                            {
+                                string coordinatesPoint;
+                                while (!reader.EndOfStream)
+                                {
+                                    coordinatesPoint = reader.ReadLine();
+                                    string[] numbers = coordinatesPoint.Split(new char[] { ',' });
+                                    if (numbers.Length != 2)
+                                        throw new ArgumentException("Invalid data " + coordinatesPoint);
+
+                                    points.Add(new Point(GetNumericValueDouble(numbers[0]), GetNumericValueDouble(numbers[1])));
+                                }
+                            }
+                            Console.WriteLine("Points read");
+                            break;
+                        case 2:
+                            using (StreamWriter writer = new StreamWriter("InputData.txt"))
+                            {
+                                foreach(Point point in points)
+                                    writer.WriteLine($"{point.CoordinateX};{point.CoordinateY}");
+                            }
+                            Console.WriteLine("Points write");
+                            break;
+                        case 3:
+                            Console.Write("Enter the X coordinate of the point: ");
+                            double x = GetNumericValueDouble(Console.ReadLine());
+                            Console.Write("Enter the Y coordinate of the point: ");
+                            double y = GetNumericValueDouble(Console.ReadLine());
+                            points.Add(new Point(x, y));
+                            Console.Clear();
+                            Console.WriteLine("Point add");
+                            break;
+                        case 4:
+                            foreach (Point point in points)
+                            {
+                                Console.WriteLine(point.ToString());
+                            }
+                            break;
+                        case 5:
+                            return;
+                    }
+                    Console.ReadKey();
+                    Console.Clear();
                 }
             }
-            catch(ArgumentException ex)
+            catch (ArgumentException exception)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(exception.Message);
             }
-
+        
             Console.ReadLine();
         }
     }
