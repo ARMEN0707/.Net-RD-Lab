@@ -14,3 +14,5 @@ C:\VisualStudio\.Net_RD_Lab\task_1\task_1\obj\Debug\net5.0\task_1.dll
 C:\VisualStudio\.Net_RD_Lab\task_1\task_1\obj\Debug\net5.0\ref\task_1.dll
 C:\VisualStudio\.Net_RD_Lab\task_1\task_1\obj\Debug\net5.0\task_1.pdb
 C:\VisualStudio\.Net_RD_Lab\task_1\task_1\obj\Debug\net5.0\task_1.genruntimeconfig.cache
+C:\VisualStudio\.Net_RD_Lab\task_1\task_1\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\VisualStudio\.Net_RD_Lab\task_1\task_1\obj\Debug\net5.0\task_1.csproj.CopyComplete

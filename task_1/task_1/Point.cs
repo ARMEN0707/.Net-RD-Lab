@@ -5,20 +5,20 @@ namespace task_1
 {
     class Point
     {
-        public double CoordinateX { get; set; }
-        public double CoordinateY { get; set; }
+        public double AxisX { get; set; }
+        public double AxisY { get; set; }
 
         public Point(double x, double y)
         {
-            CoordinateX = x;
-            CoordinateY = y;
+            AxisX = x;
+            AxisY = y;
         }
 
 
 
         public override string ToString()
         {
-            return "X: " + CoordinateX + " Y: " + CoordinateY;
+            return $"X: {AxisX} Y: {AxisY}";
         }
     }
 }

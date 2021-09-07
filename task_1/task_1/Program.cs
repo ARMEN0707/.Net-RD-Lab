@@ -1,28 +1,56 @@
 ﻿using System;
-using System.Globalization;
 using System.IO;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace task_1
 {
     class Program
-    {
-        static double GetNumericValueDouble(string str)
+    {       
+        static void ReadPointsFromFile(List<Point> points)
         {
-            double number;
-            if (!Double.TryParse(str, NumberStyles.AllowDecimalPoint, CultureInfo.CreateSpecificCulture("en-us"), out number))
-                throw new ArgumentException("Invalid data " + str);
+            using (StreamReader reader = new StreamReader("InputData.txt"))
+            {
+                string coordinatesPoint;
+                while (!reader.EndOfStream)
+                {
+                    coordinatesPoint = reader.ReadLine();
+                    string[] numbers = coordinatesPoint.Split(new char[] { ',' });
+                    if (numbers.Length != 2)
+                        throw new ArgumentException("Invalid data " + coordinatesPoint);
 
-            return number;
+                    points.Add(new Point(
+                        ConvertString.GetNumericValueDouble(numbers[0]),
+                        ConvertString.GetNumericValueDouble(numbers[1])
+                        ));
+                }
+            }
+            Console.WriteLine("Points read");
         }
 
-        static int GetNumericValueInt(string str)
+        static void ReadPointsFromJsonFile(ref List<Point> points)
         {
-            int number;
-            if (!Int32.TryParse(str, NumberStyles.AllowDecimalPoint, CultureInfo.CreateSpecificCulture("en-us"), out number))
-                throw new ArgumentException("Invalid data " + str);
+            using (StreamReader reader = new StreamReader("InputDataJson.json"))
+            {
+                string coordinatesPoint;
+                while (!reader.EndOfStream)
+                {
+                    coordinatesPoint = reader.ReadLine();
+                    points = JsonConvert.DeserializeObject<List<Point>>(coordinatesPoint);
+                }
+            }
+            Console.WriteLine("Points read");
+        }
 
-            return number;
+        static void EnterPointFromConsole(List<Point> points)
+        {
+            Console.Write("Enter the X coordinate of the point: ");
+            double x = ConvertString.GetNumericValueDouble(Console.ReadLine());
+            Console.Write("Enter the Y coordinate of the point: ");
+            double y = ConvertString.GetNumericValueDouble(Console.ReadLine());
+            points.Add(new Point(x, y));
+            Console.Clear();
+            Console.WriteLine("Point add");
         }
 
         static void Main(string[] args)
@@ -37,11 +65,11 @@ namespace task_1
                     while (true)
                     {
                         Console.WriteLine("1-Read points from a file");
-                        Console.WriteLine("2-Write a points in the file");
+                        Console.WriteLine("2-Read points from a Json file");
                         Console.WriteLine("3-Enter point");
                         Console.WriteLine("4-Print points");
                         Console.WriteLine("5-Exit");
-                        choose = GetNumericValueInt(Console.ReadLine());
+                        choose = ConvertString.GetNumericValueInt(Console.ReadLine());
                         if (choose < 1 || choose > 5)
                         {
                             Console.Clear();
@@ -57,37 +85,13 @@ namespace task_1
                     switch(choose)
                     {
                         case 1:
-                            using (StreamReader reader = new StreamReader("InputData.txt"))
-                            {
-                                string coordinatesPoint;
-                                while (!reader.EndOfStream)
-                                {
-                                    coordinatesPoint = reader.ReadLine();
-                                    string[] numbers = coordinatesPoint.Split(new char[] { ',' });
-                                    if (numbers.Length != 2)
-                                        throw new ArgumentException("Invalid data " + coordinatesPoint);
-
-                                    points.Add(new Point(GetNumericValueDouble(numbers[0]), GetNumericValueDouble(numbers[1])));
-                                }
-                            }
-                            Console.WriteLine("Points read");
+                            ReadPointsFromFile(points);
                             break;
                         case 2:
-                            using (StreamWriter writer = new StreamWriter("InputData.txt"))
-                            {
-                                foreach(Point point in points)
-                                    writer.WriteLine($"{point.CoordinateX};{point.CoordinateY}");
-                            }
-                            Console.WriteLine("Points write");
+                            ReadPointsFromJsonFile(ref points);
                             break;
                         case 3:
-                            Console.Write("Enter the X coordinate of the point: ");
-                            double x = GetNumericValueDouble(Console.ReadLine());
-                            Console.Write("Enter the Y coordinate of the point: ");
-                            double y = GetNumericValueDouble(Console.ReadLine());
-                            points.Add(new Point(x, y));
-                            Console.Clear();
-                            Console.WriteLine("Point add");
+                            EnterPointFromConsole(points);
                             break;
                         case 4:
                             foreach (Point point in points)
@@ -102,12 +106,12 @@ namespace task_1
                     Console.Clear();
                 }
             }
-            catch (ArgumentException exception)
+            catch (Exception exception)
             {
                 Console.WriteLine(exception.Message);
             }
         
-            Console.ReadLine();
+            Console.ReadKey();
         }
     }
 }
