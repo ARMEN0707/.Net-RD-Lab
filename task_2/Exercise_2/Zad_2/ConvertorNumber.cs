@@ -2,7 +2,7 @@
 
 namespace Zad_2
 {
-    struct ConvertorNumber
+    class ConvertorNumber
     {
         public string Convert(int number)
         {
