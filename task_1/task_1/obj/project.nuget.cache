@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wqRaZKEMluHAG+9bFRW5QWyQFwSoLl+wSFPt/mVKh94tagLtAlLejvZtvSI4cPAjGrNOzLoEYEORp1L6H2R/Yw==",
+  "dgSpecHash": "tHTqD5M0jrEK0cHlqEBUJsVyyZd4TO0DGX+LxvK2ewPzSFstGzgygW/G8Vqj+TC8+Nc+AGPrrW6i2H0boahAew==",
   "success": true,
-  "projectFilePath": "C:\\VisualStudio\\.Net_RD_Lab\\task_1\\task_1\\task_1.csproj",
+  "projectFilePath": "C:\\VisualStudio\\.Net_RD_Lab\\task_1\\task_1\\Task_1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gleb1\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
   ],

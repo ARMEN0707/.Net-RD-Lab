@@ -6,42 +6,7 @@ using Newtonsoft.Json;
 namespace task_1
 {
     class Program
-    {       
-        static void ReadPointsFromFile(List<Point> points)
-        {
-            using (StreamReader reader = new StreamReader("InputData.txt"))
-            {
-                string coordinatesPoint;
-                while (!reader.EndOfStream)
-                {
-                    coordinatesPoint = reader.ReadLine();
-                    string[] numbers = coordinatesPoint.Split(new char[] { ',' });
-                    if (numbers.Length != 2)
-                        throw new ArgumentException("Invalid data " + coordinatesPoint);
-
-                    points.Add(new Point(
-                        ConvertString.GetNumericValueDouble(numbers[0]),
-                        ConvertString.GetNumericValueDouble(numbers[1])
-                        ));
-                }
-            }
-            Console.WriteLine("Points read");
-        }
-
-        static void ReadPointsFromJsonFile(ref List<Point> points)
-        {
-            using (StreamReader reader = new StreamReader("InputDataJson.json"))
-            {
-                string coordinatesPoint;
-                while (!reader.EndOfStream)
-                {
-                    coordinatesPoint = reader.ReadLine();
-                    points = JsonConvert.DeserializeObject<List<Point>>(coordinatesPoint);
-                }
-            }
-            Console.WriteLine("Points read");
-        }
-
+    {
         static void EnterPointFromConsole(List<Point> points)
         {
             Console.Write("Enter the X coordinate of the point: ");
@@ -56,7 +21,7 @@ namespace task_1
         static void Main(string[] args)
         {
             int choose;
-            List<Point> points = new List<Point>();
+            var points = new List<Point>();
 
             try
             {
@@ -85,10 +50,12 @@ namespace task_1
                     switch(choose)
                     {
                         case 1:
-                            ReadPointsFromFile(points);
+                            var readerFile = new ReaderFile("InputData.txt");
+                            readerFile.ReadPointsFromFile(points);
                             break;
                         case 2:
-                            ReadPointsFromJsonFile(ref points);
+                            var readerJson = new ReaderJson("InputDataJson.json");
+                            readerJson.ReadPointsFromFile(points);
                             break;
                         case 3:
                             EnterPointFromConsole(points);

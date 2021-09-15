@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\VisualStudio\\.Net_RD_Lab\\task_1\\task_1\\task_1.csproj": {}
+    "C:\\VisualStudio\\.Net_RD_Lab\\task_1\\task_1\\Task_1.csproj": {}
   },
   "projects": {
-    "C:\\VisualStudio\\.Net_RD_Lab\\task_1\\task_1\\task_1.csproj": {
+    "C:\\VisualStudio\\.Net_RD_Lab\\task_1\\task_1\\Task_1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\VisualStudio\\.Net_RD_Lab\\task_1\\task_1\\task_1.csproj",
-        "projectName": "task_1",
-        "projectPath": "C:\\VisualStudio\\.Net_RD_Lab\\task_1\\task_1\\task_1.csproj",
+        "projectUniqueName": "C:\\VisualStudio\\.Net_RD_Lab\\task_1\\task_1\\Task_1.csproj",
+        "projectName": "Task_1",
+        "projectPath": "C:\\VisualStudio\\.Net_RD_Lab\\task_1\\task_1\\Task_1.csproj",
         "packagesPath": "C:\\Users\\gleb1\\.nuget\\packages\\",
         "outputPath": "C:\\VisualStudio\\.Net_RD_Lab\\task_1\\task_1\\obj\\",
         "projectStyle": "PackageReference",

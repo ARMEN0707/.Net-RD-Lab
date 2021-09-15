@@ -14,8 +14,6 @@ namespace task_1
             AxisY = y;
         }
 
-
-
         public override string ToString()
         {
             return $"X: {AxisX} Y: {AxisY}";

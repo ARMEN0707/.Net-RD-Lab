@@ -6,12 +6,12 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v5.0": {
-      "task_1/1.0.0": {
+      "Task_1/1.0.0": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
-          "task_1.dll": {}
+          "Task_1.dll": {}
         }
       },
       "Newtonsoft.Json/13.0.1": {
@@ -25,7 +25,7 @@
     }
   },
   "libraries": {
-    "task_1/1.0.0": {
+    "Task_1/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
