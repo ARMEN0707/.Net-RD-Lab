@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zl6ufnjEpTn8e7KLtJawy8k31mnFdDJid9NW0/XCyYINP4y2xZ8e0MhZODecdsQQSu5pzQJ+19q5VWEvOtHODQ==",
+  "dgSpecHash": "3N5TB4d0PMdGbRGo8L7CNsV0ihcs8sto9K+A9QTcbza/Pkb/RKqjrJW3iGP0eOXiUJUkMTubYxOiz1eDzIPubw==",
   "success": true,
-  "projectFilePath": "C:\\VisualStudio\\.Net_RD_Lab\\test_3\\task_3.Test\\task_3.Test.csproj",
+  "projectFilePath": "C:\\VisualStudio\\.Net_RD_Lab\\task_3\\task_3.Test\\task_3.Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gleb1\\.nuget\\packages\\coverlet.collector\\3.0.2\\coverlet.collector.3.0.2.nupkg.sha512",
     "C:\\Users\\gleb1\\.nuget\\packages\\microsoft.codecoverage\\16.9.4\\microsoft.codecoverage.16.9.4.nupkg.sha512",

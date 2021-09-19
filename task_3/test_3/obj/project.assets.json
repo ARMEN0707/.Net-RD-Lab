@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\VisualStudio\\.Net_RD_Lab\\test_3\\test_3\\test_3.csproj",
-      "projectName": "test_3",
-      "projectPath": "C:\\VisualStudio\\.Net_RD_Lab\\test_3\\test_3\\test_3.csproj",
+      "projectUniqueName": "C:\\VisualStudio\\.Net_RD_Lab\\task_3\\test_3\\task_3.csproj",
+      "projectName": "task_3",
+      "projectPath": "C:\\VisualStudio\\.Net_RD_Lab\\task_3\\test_3\\task_3.csproj",
       "packagesPath": "C:\\Users\\gleb1\\.nuget\\packages\\",
-      "outputPath": "C:\\VisualStudio\\.Net_RD_Lab\\test_3\\test_3\\obj\\",
+      "outputPath": "C:\\VisualStudio\\.Net_RD_Lab\\task_3\\test_3\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\gleb1\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1254,14 +1254,14 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
-      "test_3/1.0.0": {
+      "task_3/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "compile": {
-          "bin/placeholder/test_3.dll": {}
+          "bin/placeholder/task_3.dll": {}
         },
         "runtime": {
-          "bin/placeholder/test_3.dll": {}
+          "bin/placeholder/task_3.dll": {}
         }
       }
     }
@@ -4953,10 +4953,10 @@
         "system.xml.xpath.xmldocument.nuspec"
       ]
     },
-    "test_3/1.0.0": {
+    "task_3/1.0.0": {
       "type": "project",
-      "path": "../test_3/test_3.csproj",
-      "msbuildProject": "../test_3/test_3.csproj"
+      "path": "../test_3/task_3.csproj",
+      "msbuildProject": "../test_3/task_3.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -4965,7 +4965,7 @@
       "NUnit >= 3.13.1",
       "NUnit3TestAdapter >= 3.17.0",
       "coverlet.collector >= 3.0.2",
-      "test_3 >= 1.0.0"
+      "task_3 >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -4974,11 +4974,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\VisualStudio\\.Net_RD_Lab\\test_3\\task_3.Test\\task_3.Test.csproj",
+      "projectUniqueName": "C:\\VisualStudio\\.Net_RD_Lab\\task_3\\task_3.Test\\task_3.Test.csproj",
       "projectName": "task_3.Test",
-      "projectPath": "C:\\VisualStudio\\.Net_RD_Lab\\test_3\\task_3.Test\\task_3.Test.csproj",
+      "projectPath": "C:\\VisualStudio\\.Net_RD_Lab\\task_3\\task_3.Test\\task_3.Test.csproj",
       "packagesPath": "C:\\Users\\gleb1\\.nuget\\packages\\",
-      "outputPath": "C:\\VisualStudio\\.Net_RD_Lab\\test_3\\task_3.Test\\obj\\",
+      "outputPath": "C:\\VisualStudio\\.Net_RD_Lab\\task_3\\task_3.Test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\gleb1\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4995,8 +4995,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\VisualStudio\\.Net_RD_Lab\\test_3\\test_3\\test_3.csproj": {
-              "projectPath": "C:\\VisualStudio\\.Net_RD_Lab\\test_3\\test_3\\test_3.csproj"
+            "C:\\VisualStudio\\.Net_RD_Lab\\task_3\\test_3\\task_3.csproj": {
+              "projectPath": "C:\\VisualStudio\\.Net_RD_Lab\\task_3\\test_3\\task_3.csproj"
             }
           }
         }
