@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace task_1
 {
-    static class ConvertString
+    static class StringConverter
     {
         public static double GetNumericValueDouble(string str)
         {

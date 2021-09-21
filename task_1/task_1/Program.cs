@@ -10,9 +10,9 @@ namespace task_1
         static void EnterPointFromConsole(List<Point> points)
         {
             Console.Write("Enter the X coordinate of the point: ");
-            double x = ConvertString.GetNumericValueDouble(Console.ReadLine());
+            double x = StringConverter.GetNumericValueDouble(Console.ReadLine());
             Console.Write("Enter the Y coordinate of the point: ");
-            double y = ConvertString.GetNumericValueDouble(Console.ReadLine());
+            double y = StringConverter.GetNumericValueDouble(Console.ReadLine());
             points.Add(new Point(x, y));
             Console.Clear();
             Console.WriteLine("Point add");
@@ -34,7 +34,7 @@ namespace task_1
                         Console.WriteLine("3-Enter point");
                         Console.WriteLine("4-Print points");
                         Console.WriteLine("5-Exit");
-                        choose = ConvertString.GetNumericValueInt(Console.ReadLine());
+                        choose = StringConverter.GetNumericValueInt(Console.ReadLine());
                         if (choose < 1 || choose > 5)
                         {
                             Console.Clear();
@@ -50,11 +50,11 @@ namespace task_1
                     switch(choose)
                     {
                         case 1:
-                            var readerFile = new ReaderFile("InputData.txt");
+                            var readerFile = new FileReader("InputData.txt");
                             readerFile.ReadPointsFromFile(points);
                             break;
                         case 2:
-                            var readerJson = new ReaderJson("InputDataJson.json");
+                            var readerJson = new JsonReader("InputDataJson.json");
                             readerJson.ReadPointsFromFile(points);
                             break;
                         case 3:

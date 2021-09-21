@@ -4,11 +4,11 @@ using System.IO;
 
 namespace task_1
 {
-    class ReaderFile : IReaderPoint
+    class FileReader : IPointReader
     {
         private string _nameFile;
 
-        public ReaderFile(string nameFile)
+        public FileReader(string nameFile)
         {
             _nameFile = nameFile;
         }
@@ -25,8 +25,8 @@ namespace task_1
                         throw new ArgumentException("Invalid data " + coordinatePoint);
 
                     points.Add(new Point(
-                        ConvertString.GetNumericValueDouble(numbers[0]),
-                        ConvertString.GetNumericValueDouble(numbers[1])
+                        StringConverter.GetNumericValueDouble(numbers[0]),
+                        StringConverter.GetNumericValueDouble(numbers[1])
                         ));
                 }
             }

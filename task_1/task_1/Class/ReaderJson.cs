@@ -5,11 +5,11 @@ using Newtonsoft.Json;
 
 namespace task_1
 {
-    class ReaderJson : IReaderPoint
+    class JsonReader : IPointReader
     {
         private string _nameFile;
 
-        public ReaderJson(string nameFile)
+        public JsonReader(string nameFile)
         {
             _nameFile = nameFile;
         }

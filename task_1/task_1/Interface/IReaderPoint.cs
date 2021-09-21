@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace task_1
 {
-    interface IReaderPoint
+    interface IPointReader
     {
         void ReadPointsFromFile(List<Point> points);
     }
