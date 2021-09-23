@@ -6,17 +6,22 @@ namespace Exercise_2
     {
         public string Convert(int number)
         {
-            string str = "";
+            string binaryCode = "";
+
+            if(number < 0)
+            {
+                throw new ArgumentException("Unsigned number");
+            }
 
             while (number > 1)
             {
                 int remainder = number % 2;
                 number /= 2;
-                str += remainder;
+                binaryCode += remainder;
             }
 
-            str += number;
-            char[] arr = str.ToCharArray();
+            binaryCode += number;
+            char[] arr = binaryCode.ToCharArray();
             Array.Reverse(arr);
             return new string(arr);
         }
