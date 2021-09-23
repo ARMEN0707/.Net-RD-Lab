@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace task_1
+namespace Task_1
 {
     interface IPointReader
     {
-        void ReadPointsFromFile(List<Point> points);
+        List<Point> ReadPointsFromFile();
     }
 }

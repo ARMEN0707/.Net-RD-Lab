@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace task_1
+namespace Task_1
 {
     class Point
     {

@@ -3,7 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace task_1
+namespace Task_1
 {
     class Program
     {
@@ -22,6 +22,9 @@ namespace task_1
         {
             int choose;
             var points = new List<Point>();
+            var objectsIPointReader = new Dictionary<int, IPointReader>();
+            objectsIPointReader[1] = new FileReader("InputData.txt");
+            objectsIPointReader[2] = new JsonReader("InputDataJson.json");
 
             try
             {
@@ -50,12 +53,8 @@ namespace task_1
                     switch(choose)
                     {
                         case 1:
-                            var readerFile = new FileReader("InputData.txt");
-                            readerFile.ReadPointsFromFile(points);
-                            break;
                         case 2:
-                            var readerJson = new JsonReader("InputDataJson.json");
-                            readerJson.ReadPointsFromFile(points);
+                            points.AddRange(objectsIPointReader[choose].ReadPointsFromFile());
                             break;
                         case 3:
                             EnterPointFromConsole(points);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace task_1
+namespace Task_1
 {
     class FileReader : IPointReader
     {
@@ -12,8 +12,9 @@ namespace task_1
         {
             _nameFile = nameFile;
         }
-        public void ReadPointsFromFile(List<Point> points)
+        public List<Point> ReadPointsFromFile()
         {
+            var points = new List<Point>();
             using (var reader = new StreamReader(_nameFile))
             {
                 string coordinatePoint;
@@ -31,6 +32,7 @@ namespace task_1
                 }
             }
             Console.WriteLine("Points read");
+            return points;
         }
     }
 }
