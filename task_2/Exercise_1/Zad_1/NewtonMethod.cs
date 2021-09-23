@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zad_1
+namespace Exercise_1
 {   
-    class MethodNewton
+    class NewtonMethod
     {
         public double Epsilon
         {
@@ -14,7 +14,7 @@ namespace Zad_1
             private set;
         }
 
-        public MethodNewton(double epsilon)
+        public NewtonMethod(double epsilon)
         {
             Epsilon = epsilon;
         }

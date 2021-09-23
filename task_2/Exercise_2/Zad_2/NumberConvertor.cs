@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Zad_2
+namespace Exercise_2
 {
-    class ConvertorNumber
+    class NumberConvertor
     {
         public string Convert(int number)
         {
