@@ -22,9 +22,9 @@ namespace Task_1
         {
             int choose;
             var points = new List<Point>();
-            var objectsIPointReader = new Dictionary<int, IPointReader>();
-            objectsIPointReader[1] = new FileReader("InputData.txt");
-            objectsIPointReader[2] = new JsonReader("InputDataJson.json");
+            var pointReaders = new Dictionary<int, IPointReader>();
+            pointReaders[1] = new FileReader("InputData.txt");
+            pointReaders[2] = new JsonReader("InputDataJson.json");
 
             try
             {
@@ -54,7 +54,7 @@ namespace Task_1
                     {
                         case 1:
                         case 2:
-                            points.AddRange(objectsIPointReader[choose].ReadPointsFromFile());
+                            points.AddRange(pointReaders[choose].ReadPointsFromFile());
                             break;
                         case 3:
                             EnterPointFromConsole(points);
