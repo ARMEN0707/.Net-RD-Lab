@@ -10,15 +10,8 @@ namespace Exercise_2
             int number = GetNumber();
             var convertor = new NumberConvertor();
             
-            try
-            {
-                Console.WriteLine("Result: " + convertor.Convert(number));
-            }catch(ArgumentException exception)
-            {
-                Console.WriteLine(exception.Message);                
-            }
-
-
+            Console.WriteLine("Result: " + convertor.Convert(number));
+            
             Console.ReadLine();
         }
 

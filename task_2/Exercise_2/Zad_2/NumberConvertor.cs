@@ -10,7 +10,7 @@ namespace Exercise_2
 
             if(number < 0)
             {
-                throw new ArgumentException("Unsigned number");
+                return System.Convert.ToString(number, 2);
             }
 
             while (number > 1)
