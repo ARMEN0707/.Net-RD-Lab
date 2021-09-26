@@ -23,8 +23,8 @@ namespace Task_1
             int choose;
             var points = new List<Point>();
             var pointReaders = new Dictionary<int, IPointReader>();
-            pointReaders[1] = new FileReader("InputData.txt");
-            pointReaders[2] = new JsonReader("InputDataJson.json");
+            pointReaders[1] = new FileReader("C:\\VisualStudio\\.Net_RD_Lab\\task_1\\InputData.txt");
+            pointReaders[2] = new JsonReader("C:\\VisualStudio\\.Net_RD_Lab\\task_1\\InputDataJson.json");
 
             try
             {
