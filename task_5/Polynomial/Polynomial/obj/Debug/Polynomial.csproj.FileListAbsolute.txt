@@ -1,7 +1,0 @@
-C:\VisualStudio\.Net_RD_Lab\task_5\Polynomial\Polynomial\obj\Debug\Polynomial.csproj.AssemblyReference.cache
-C:\VisualStudio\.Net_RD_Lab\task_5\Polynomial\Polynomial\obj\Debug\Polynomial.csproj.CoreCompileInputs.cache
-C:\VisualStudio\.Net_RD_Lab\task_5\Polynomial\Polynomial\bin\Debug\Polynomial.exe.config
-C:\VisualStudio\.Net_RD_Lab\task_5\Polynomial\Polynomial\bin\Debug\Polynomial.exe
-C:\VisualStudio\.Net_RD_Lab\task_5\Polynomial\Polynomial\bin\Debug\Polynomial.pdb
-C:\VisualStudio\.Net_RD_Lab\task_5\Polynomial\Polynomial\obj\Debug\Polynomial.exe
-C:\VisualStudio\.Net_RD_Lab\task_5\Polynomial\Polynomial\obj\Debug\Polynomial.pdb
