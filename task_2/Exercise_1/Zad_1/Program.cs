@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zad_1
+namespace Exercise_1
 {
     class Program
     {
@@ -18,7 +18,7 @@ namespace Zad_1
 
             try
             {
-                MethodNewton methodNewton = new MethodNewton(epsilon);
+                var methodNewton = new NewtonMethod(epsilon);
                 double result = methodNewton.Sqrt(number, degree);
                 Console.WriteLine("Result: " + result);
             }

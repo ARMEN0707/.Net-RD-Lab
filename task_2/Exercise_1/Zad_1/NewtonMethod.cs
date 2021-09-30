@@ -4,20 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zad_1
+namespace Exercise_1
 {   
-    struct MethodNewton
+    class NewtonMethod
     {
-        private readonly double _epsilon;
-
         public double Epsilon
         {
-            get { return _epsilon; }
+            get;
+            private set;
         }
 
-        public MethodNewton(double epsilon)
+        public NewtonMethod(double epsilon)
         {
-            _epsilon = epsilon;
+            Epsilon = epsilon;
         }
 
         public double Sqrt(double number, double degree)

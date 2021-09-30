@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zad_2
+namespace Exercise_2
 {
     class Program
     {
@@ -8,10 +8,10 @@ namespace Zad_2
         {
             Console.Write("Enter number: ");
             int number = GetNumber();
-            ConvertorNumber convertor = new ConvertorNumber();
-
+            var convertor = new NumberConvertor();
+            
             Console.WriteLine("Result: " + convertor.Convert(number));
-
+            
             Console.ReadLine();
         }
 
