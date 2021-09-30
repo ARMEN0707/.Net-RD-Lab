@@ -3,51 +3,16 @@ using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace task_1
+namespace Task_1
 {
     class Program
-    {       
-        static void ReadPointsFromFile(List<Point> points)
-        {
-            using (StreamReader reader = new StreamReader("InputData.txt"))
-            {
-                string coordinatesPoint;
-                while (!reader.EndOfStream)
-                {
-                    coordinatesPoint = reader.ReadLine();
-                    string[] numbers = coordinatesPoint.Split(new char[] { ',' });
-                    if (numbers.Length != 2)
-                        throw new ArgumentException("Invalid data " + coordinatesPoint);
-
-                    points.Add(new Point(
-                        ConvertString.GetNumericValueDouble(numbers[0]),
-                        ConvertString.GetNumericValueDouble(numbers[1])
-                        ));
-                }
-            }
-            Console.WriteLine("Points read");
-        }
-
-        static void ReadPointsFromJsonFile(ref List<Point> points)
-        {
-            using (StreamReader reader = new StreamReader("InputDataJson.json"))
-            {
-                string coordinatesPoint;
-                while (!reader.EndOfStream)
-                {
-                    coordinatesPoint = reader.ReadLine();
-                    points = JsonConvert.DeserializeObject<List<Point>>(coordinatesPoint);
-                }
-            }
-            Console.WriteLine("Points read");
-        }
-
+    {
         static void EnterPointFromConsole(List<Point> points)
         {
             Console.Write("Enter the X coordinate of the point: ");
-            double x = ConvertString.GetNumericValueDouble(Console.ReadLine());
+            double x = StringConverter.GetNumericValueDouble(Console.ReadLine());
             Console.Write("Enter the Y coordinate of the point: ");
-            double y = ConvertString.GetNumericValueDouble(Console.ReadLine());
+            double y = StringConverter.GetNumericValueDouble(Console.ReadLine());
             points.Add(new Point(x, y));
             Console.Clear();
             Console.WriteLine("Point add");
@@ -56,7 +21,10 @@ namespace task_1
         static void Main(string[] args)
         {
             int choose;
-            List<Point> points = new List<Point>();
+            var points = new List<Point>();
+            var pointReaders = new Dictionary<int, IPointReader>();
+            pointReaders[1] = new FileReader("C:\\VisualStudio\\.Net_RD_Lab\\task_1\\InputData.txt");
+            pointReaders[2] = new JsonReader("C:\\VisualStudio\\.Net_RD_Lab\\task_1\\InputDataJson.json");
 
             try
             {
@@ -69,7 +37,7 @@ namespace task_1
                         Console.WriteLine("3-Enter point");
                         Console.WriteLine("4-Print points");
                         Console.WriteLine("5-Exit");
-                        choose = ConvertString.GetNumericValueInt(Console.ReadLine());
+                        choose = StringConverter.GetNumericValueInt(Console.ReadLine());
                         if (choose < 1 || choose > 5)
                         {
                             Console.Clear();
@@ -85,10 +53,8 @@ namespace task_1
                     switch(choose)
                     {
                         case 1:
-                            ReadPointsFromFile(points);
-                            break;
                         case 2:
-                            ReadPointsFromJsonFile(ref points);
+                            points.AddRange(pointReaders[choose].ReadPointsFromFile());
                             break;
                         case 3:
                             EnterPointFromConsole(points);
