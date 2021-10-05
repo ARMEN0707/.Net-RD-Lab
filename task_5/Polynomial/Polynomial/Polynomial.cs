@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Polynomial
 {
@@ -19,18 +15,44 @@ namespace Polynomial
         public Polynomial(params double[] coefficients)
         {
             if (coefficients == null)
-            {
-                string message = "_coefficients cannot be null.";
-                throw new ArgumentNullException(message);
-            }
+                throw new ArgumentNullException("coefficients cannot be null.");
 
             if (coefficients.Length == 0)
-            {
-                string message = "_coefficients cannot be empty.";
-                throw new ArgumentException(message);
-            }
+                throw new ArgumentException("coefficients cannot be empty.");
 
             _coefficients = (double[])coefficients.Clone();
+        }
+
+        public Polynomial(string value)
+        {
+            if (value == null)
+                throw new ArgumentNullException("String cannot be null.");
+
+            if (value.Length == 0)
+                throw new ArgumentException("String cannot be empty.");
+
+            string[] summands = value.Split('+');
+            _coefficients = new double[summands.Length];
+            foreach (var summand in summands)
+            {
+                string[] multipliers = summand.Split('*');
+                if(multipliers.Length == 1)
+                {
+                    _coefficients[0] = double.Parse(multipliers[0]);
+                }
+                else
+                {
+                    string[] degrees = multipliers[1].Split('^');
+                    if (degrees.Length == 1)
+                    {
+                        _coefficients[1] = double.Parse(multipliers[0]);
+                    }
+                    else
+                    {
+                        _coefficients[int.Parse(degrees[1])] = double.Parse(multipliers[0]);
+                    }
+                }
+            }
         }
 
         public double this[int index]
@@ -38,133 +60,106 @@ namespace Polynomial
             get
             {
                 if (index >= 0 && index < _coefficients.Length)
-                {
                     return _coefficients[index];
-                }
                 else
-                {
-                    string message = "index is not a valid";
-                    throw new ArgumentOutOfRangeException(message);
-                }
+                    throw new ArgumentOutOfRangeException("index is not a valid");
             }
 
             private set
             {
                 if (index >= 0 && index < _coefficients.Length)
-                {
                     _coefficients[index] = value;
-                }
                 else
-                {
-                    string message = "index is not a valid";
-                    throw new ArgumentOutOfRangeException(message);
-                }
+                    throw new ArgumentOutOfRangeException("index is not a valid");
             }
         }
 
-        public static Polynomial operator +(Polynomial lPolynimial, Polynomial rPolynimial)
+        public static Polynomial operator +(Polynomial leftPolynimial, Polynomial rightPolynimial)
         {
-            if (lPolynimial == null || rPolynimial == null)
-            {
-                string message = "Polynomial cannot be null";
-                throw new ArgumentNullException(message);
-            }
+            if (leftPolynimial == null || rightPolynimial == null)
+                throw new ArgumentNullException("Polynomial cannot be null");
 
-            double[] result;
-            int size = Math.Max(lPolynimial._coefficients.Length, rPolynimial._coefficients.Length);
-            result = new double[size];
+            double[] newCoefficients;
+            int size = Math.Max(leftPolynimial._coefficients.Length, rightPolynimial._coefficients.Length);
+            newCoefficients = new double[size];
 
             for (int i = 0; i < size; i++)
             {
                 double a = 0;
                 double b = 0;
 
-                if (i < lPolynimial._coefficients.Length)
-                {
-                    a = lPolynimial[i];
-                }
+                if (i < leftPolynimial._coefficients.Length)
+                    a = leftPolynimial[i];
 
-                if (i < rPolynimial._coefficients.Length)
-                {
-                    b = rPolynimial[i];
-                }
+                if (i < rightPolynimial._coefficients.Length)
+                    b = rightPolynimial[i];
 
-                result[i] = a + b;
+                newCoefficients[i] = a + b;
             }
 
-            return new Polynomial(result);
+            return new Polynomial(newCoefficients);
         }
 
-        public static Polynomial operator -(Polynomial lPolynimial, Polynomial rPolynimial)
+        public static Polynomial operator -(Polynomial leftPolynimial, Polynomial rightPolynimial)
         {
-            if (lPolynimial == null || rPolynimial == null)
-            {
-                string message = "Polynomial cannot be null";
-                throw new ArgumentNullException(message);
-            }
+            if (leftPolynimial == null || rightPolynimial == null)
+                throw new ArgumentNullException("Polynomial cannot be null");
 
-            double[] result;
-            int size = Math.Max(lPolynimial._coefficients.Length, rPolynimial._coefficients.Length);
-            result = new double[size];
+            double[] newCoefficients;
+            int size = Math.Max(leftPolynimial._coefficients.Length, rightPolynimial._coefficients.Length);
+            newCoefficients = new double[size];
 
             for (int i = 0; i < size; i++)
             {
                 double a = 0;
                 double b = 0;
 
-                if (i < lPolynimial._coefficients.Length)
-                {
-                    a = lPolynimial[i];
-                }
+                if (i < leftPolynimial._coefficients.Length)
+                    a = leftPolynimial[i];
 
-                if (i < rPolynimial._coefficients.Length)
-                {
-                    b = rPolynimial[i];
-                }
+                if (i < rightPolynimial._coefficients.Length)
+                    b = rightPolynimial[i];
 
-                result[i] = a - b;
+                newCoefficients[i] = a - b;
             }
 
-            return new Polynomial(result);
+            return new Polynomial(newCoefficients);
         }
 
-        public static Polynomial operator *(Polynomial lPolynimial, Polynomial rPolynimial)
+        public static Polynomial operator *(Polynomial leftPolynimial, Polynomial rightPolynimial)
         {
-            if (lPolynimial == null || rPolynimial == null)
-            {
-                string message = "Polynomial cannot be null";
-                throw new ArgumentNullException(message);
-            }
+            if (leftPolynimial == null || rightPolynimial == null)
+                throw new ArgumentNullException("Polynomial cannot be null");
 
-            double[] result = new double[lPolynimial._coefficients.Length + rPolynimial._coefficients.Length - 1];
-            for (int i = 0; i < lPolynimial._coefficients.Length; i++)
+            double[] newCoefficients = new double[leftPolynimial._coefficients.Length + rightPolynimial._coefficients.Length - 1];
+            for (int i = 0; i < leftPolynimial._coefficients.Length; i++)
             {
-                for (int j = 0; j < rPolynimial._coefficients.Length; j++)
+                for (int j = 0; j < rightPolynimial._coefficients.Length; j++)
                 {
-                    double number = lPolynimial[i] * rPolynimial[j];
-                    int degree = i + j;
-                    result[degree] += number;
+                    double number = leftPolynimial[i] * rightPolynimial[j];
+                    int degrees = i + j;
+                    newCoefficients[degrees] += number;
                 }
             }
 
-            return new Polynomial(result);
+            return new Polynomial(newCoefficients);
         }
 
-        public static bool operator ==(Polynomial lPolynimial, Polynomial rPolynimial)
+        public static bool operator ==(Polynomial leftPolynimial, Polynomial rightPolynimial)
         {
-            if ((object)rPolynimial == null)
-            {
-                return (object)lPolynimial == null;
-            }
+            if ((object)rightPolynimial == null)
+                return (object)leftPolynimial == null;
 
-            if (lPolynimial._coefficients.Length == rPolynimial._coefficients.Length)
+            if ((object)leftPolynimial == null)
+                return (object)rightPolynimial == null;
+
+
+            if (leftPolynimial._coefficients.Length == rightPolynimial._coefficients.Length)
             {
-                for (int i = 0; i < rPolynimial._coefficients.Length; i++)
+                for (int i = 0; i < rightPolynimial._coefficients.Length; i++)
                 {
-                    if (Math.Abs(lPolynimial[i] - rPolynimial[i]) >= s_Epsilon)
-                    {
+                    if (Math.Abs(leftPolynimial[i] - rightPolynimial[i]) >= s_Epsilon)
                         return false;
-                    }
                 }
 
                 return true;
@@ -173,24 +168,24 @@ namespace Polynomial
             return false;
         }
 
-        public static bool operator !=(Polynomial lPolynimial, Polynomial rPolynimial)
+        public static bool operator !=(Polynomial leftPolynimial, Polynomial rightPolynimial)
         {
-            return !(lPolynimial == rPolynimial);
+            return !(leftPolynimial == rightPolynimial);
         }
 
-        public static Polynomial Add(Polynomial lPolynimial, Polynomial rPolynimial)
+        public static Polynomial Add(Polynomial leftPolynimial, Polynomial rightPolynimial)
         {
-            return lPolynimial + rPolynimial;
+            return leftPolynimial + rightPolynimial;
         }
 
-        public static Polynomial Subtract(Polynomial lPolynimial, Polynomial rPolynimial)
+        public static Polynomial Subtract(Polynomial leftPolynimial, Polynomial rightPolynimial)
         {
-            return lPolynimial - rPolynimial;
+            return leftPolynimial - rightPolynimial;
         }
 
-        public static Polynomial Multiply(Polynomial lPolynimial, Polynomial rPolynimial)
+        public static Polynomial Multiply(Polynomial leftPolynimial, Polynomial rightPolynimial)
         {
-            return lPolynimial * rPolynimial;
+            return leftPolynimial * rightPolynimial;
         }
 
         public override bool Equals(object obj)
@@ -253,14 +248,6 @@ namespace Polynomial
         public object Clone()
         {
             return new Polynomial((double[])_coefficients.Clone());
-        }
-    }
-
-    class Program
-    {
-        static void Main()
-        {
-
         }
     }
 }
