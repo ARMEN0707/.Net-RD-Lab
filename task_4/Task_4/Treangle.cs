@@ -22,14 +22,14 @@ namespace Task_4
         {
             get { return _sideC; }
             set { _sideC = CheckSide(value); }
-            
+
         }
 
-        public Treangle(double a, double b, double c)
+        public Treangle(double sideA, double sideB, double sideC)
         {
-            _sideA = a;
-            _sideB = b;
-            _sideC = c;
+            SideA = sideA;
+            SideB = sideB;
+            SideC = sideC;
             if (!CheckTriangle())
             {
                 throw new ArgumentException("Triangle cannot exist");
@@ -54,43 +54,18 @@ namespace Task_4
         public double CheckSide(double value)
         {
             if (value <= 0)
-                return 0;
+                throw new ArgumentException("A value less than zero is used, but the argument cannot be less than zero.");
 
             return value;
         }
 
-        public double Perimeter() => _sideA + _sideB + _sideC;
+        public double GetPerimeter() => _sideA + _sideB + _sideC;
 
-        public double Square()
+        public double GetSquare()
         {
-            double halfPerimetr = Perimeter() / 2.0f;
-            double rez = halfPerimetr * (halfPerimetr - _sideA) * (halfPerimetr - _sideB) * (halfPerimetr - _sideC);
-            return Math.Sqrt(rez);
+            double halfPerimetr = GetPerimeter() / 2.0f;
+            double square = halfPerimetr * (halfPerimetr - _sideA) * (halfPerimetr - _sideB) * (halfPerimetr - _sideC);
+            return Math.Sqrt(square);
         }
-
-        class Program
-        {
-            static void Main()
-            {
-                try
-                {
-                    Console.Write("Enter SideA: ");
-                    double sideA = double.Parse(Console.ReadLine());
-                    Console.Write("Enter SideB: ");
-                    double sideB = double.Parse(Console.ReadLine());
-                    Console.Write("Enter SideC: ");
-                    double sideC = double.Parse(Console.ReadLine());
-
-                    Treangle treangle = new Treangle(sideA, sideB, sideC);
-                    Console.WriteLine("Square: " + treangle.Square());
-                    Console.WriteLine("Perimetr: " + treangle.Perimeter());
-                }
-                catch(ArgumentException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-        }
-
     }
 }

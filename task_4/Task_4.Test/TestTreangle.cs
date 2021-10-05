@@ -2,7 +2,7 @@ using NUnit.Framework;
 using System;
 namespace Task_4.Test
 {
-    public class TestsTreangle
+    public class TestTreangle
     {
         [TestCase(1, 2, 3)]
         [TestCase(5, 13, 3)]
@@ -11,24 +11,24 @@ namespace Task_4.Test
         [TestCase(0, 2, 3)]
         [TestCase(1, 2, 0)]
         [TestCase(-4, 2, 3)]
-        public void CheckTreangle_ThrowArgumentException(double a, double b, double c) =>
-            Assert.Throws<ArgumentException>(() => new Treangle(a, b, c), message: "Triangle cannot exist.");
+        public void Constructor_MultipleNumbers_ThrowArgumentException(double sideA, double sideB, double sideC) =>
+            Assert.Throws<ArgumentException>(() => new Treangle(sideA, sideB, sideC), message: "Triangle cannot exist.");
 
         [TestCase(5, 6, 3, ExpectedResult = 7.483314773547883)]
         [TestCase(7, 3, 5, ExpectedResult = 6.49519052838329)]
         [TestCase(12, 4, 9, ExpectedResult = 13.635890143294644)]
-        public double SquareTest(double a, double b, double c)
+        public double Square_MultipleNumbers_ReturnsNumber(double sideA, double sideB, double sideC)
         {
-            Treangle treangle = new Treangle(a, b, c);
-            return treangle.Square();
+            Treangle treangle = new Treangle(sideA, sideB, sideC);
+            return treangle.GetSquare();
         }
 
         [TestCase(5, 6, 3, ExpectedResult = 14)]
         [TestCase(7, 3, 5, ExpectedResult = 15)]
-        public double PerimeterTest(double a, double b, double c)
+        public double Perimeter_MultipleNumbers_ReturnsNumber(double sideA, double sideB, double sideC)
         {
-            Treangle treangle = new Treangle(a, b, c);
-            return treangle.Perimeter();
+            Treangle treangle = new Treangle(sideA, sideB, sideC);
+            return treangle.GetPerimeter();
         }
     }
 }
