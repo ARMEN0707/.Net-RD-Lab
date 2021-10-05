@@ -64,10 +64,10 @@ namespace task_3
             return FindGreatestCommonDivisor(greatestCommonDivisor, thridNumber);
         }
 
-        public int FindGreatestCommonDivisor(int firstNumber, int secondNumber, int c, int d)
+        public int FindGreatestCommonDivisor(int firstNumber, int secondNumber, int thridNumber, int fourthNumber)
         {
-            int greatestCommonDivisor = FindGreatestCommonDivisor(firstNumber, secondNumber, c);
-            return FindGreatestCommonDivisor(greatestCommonDivisor, d);
+            int greatestCommonDivisor = FindGreatestCommonDivisor(firstNumber, secondNumber, thridNumber);
+            return FindGreatestCommonDivisor(greatestCommonDivisor, fourthNumber);
         }
 
         public int FindGreatestCommonDivisor(int firstNumber, int secondNumber, int thridNumber, int fourthNumber, int fifthNumber)
