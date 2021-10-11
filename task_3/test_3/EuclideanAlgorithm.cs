@@ -1,16 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
 
 namespace task_3
 {
-    public struct EuclideanAlgorithm
+    public class EuclideanAlgorithm
     {
+        private Stopwatch _stopwatch;
+
+        public EuclideanAlgorithm()
+        {
+            _stopwatch = new Stopwatch();
+        }
+
         public int FindGreatestCommonDivisorBinaryAlgorithm(int firstNumber, int secondNumber, out long time)
         {
+            if(!_stopwatch.IsRunning)
+                _stopwatch.Start();
+
             if ((firstNumber == 0) || (secondNumber == 0) || (firstNumber == secondNumber))
             {
-                time = DateTime.Now.Ticks;
+                _stopwatch.Stop();
+                time = _stopwatch.Elapsed.Ticks;
+                _stopwatch.Reset();
                 return Math.Max(firstNumber, secondNumber);
             }
 
@@ -29,7 +40,9 @@ namespace task_3
             if ((firstNumber % 2 == 1) && (secondNumber % 2 == 1) && secondNumber < firstNumber)
                 return FindGreatestCommonDivisorBinaryAlgorithm((firstNumber - secondNumber) / 2, secondNumber, out time);
 
-            time = DateTime.Now.Ticks;
+            _stopwatch.Stop();
+            time = _stopwatch.Elapsed.Ticks;
+            _stopwatch.Reset();
             return 0;
         }
         public int FindGreatestCommonDivisor(int firstNumber, int secondNumber)
@@ -53,9 +66,11 @@ namespace task_3
 
         public int FindGreatestCommonDivisor(int firstNumber, int secondNumber, out long time)
         {
-            long startTime = DateTime.Now.Ticks;
+            _stopwatch.Start();
             int greatestCommonDivisor = FindGreatestCommonDivisor(firstNumber, secondNumber);
-            time = DateTime.Now.Ticks - startTime;
+            _stopwatch.Stop();
+            time = _stopwatch.Elapsed.Ticks;
+            _stopwatch.Reset();
             return greatestCommonDivisor;
         }
         public int FindGreatestCommonDivisor(int firstNumber, int secondNumber, int thridNumber)

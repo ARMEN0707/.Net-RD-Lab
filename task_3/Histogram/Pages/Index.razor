@@ -1,0 +1,52 @@
+﻿@page "/"
+
+@using task_3;
+@using Syncfusion.Blazor.Charts
+@using Histogram.Models
+
+<input @bind="@FirstNumber" />
+<input @bind="@SecondNumber" />
+<button @onclick="CreateHistogram">Начать</button>
+
+@if (IsCreate)
+{
+    <div>Результат: @Result</div>
+    <SfChart>
+        <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category" />
+
+        <ChartSeriesCollection>
+            <ChartSeries DataSource="@Data" XName="Label" YName="Time" Type="ChartSeriesType.Column">
+                <ChartMarker>
+                    <ChartDataLabel Visible="true" Position="Syncfusion.Blazor.Charts.LabelPosition.Middle" />
+                </ChartMarker>
+            </ChartSeries>
+        </ChartSeriesCollection>
+    </SfChart>
+}
+
+
+@code
+{
+    public EuclideanAlgorithm EuclideanAlgorithm;
+    public List<ColumnHistogram> Data = new List<ColumnHistogram>();
+    public int FirstNumber;
+    public int SecondNumber;
+    public bool IsCreate = false;
+    public int Result;
+
+
+    public void CreateHistogram()
+    {
+        long time;
+
+        EuclideanAlgorithm = new EuclideanAlgorithm();
+
+        Result = EuclideanAlgorithm.FindGreatestCommonDivisorBinaryAlgorithm(FirstNumber, SecondNumber, out time);
+        Data.Add(new ColumnHistogram("Euclidean algorithm", time));
+
+        EuclideanAlgorithm.FindGreatestCommonDivisor(FirstNumber, SecondNumber, out time);
+        Data.Add(new ColumnHistogram("Euclidean binary algorithm", time));
+
+        IsCreate = true;
+    }
+}
