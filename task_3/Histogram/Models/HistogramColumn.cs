@@ -3,12 +3,12 @@
 
 namespace Histogram.Models
 {
-    public class ColumnHistogram
+    public class HistogramColumn
     {
         public string Label { get; set; }
         public long Time { get; set; }
 
-        public ColumnHistogram(string label, long time)
+        public HistogramColumn(string label, long time)
         {
             Label = label;
             Time = time;

@@ -28,7 +28,7 @@
 @code
 {
     public EuclideanAlgorithm EuclideanAlgorithm;
-    public List<ColumnHistogram> Data = new List<ColumnHistogram>();
+    public List<HistogramColumn> Data = new List<HistogramColumn>();
     public int FirstNumber;
     public int SecondNumber;
     public bool IsCreate = false;
@@ -42,10 +42,10 @@
         EuclideanAlgorithm = new EuclideanAlgorithm();
 
         Result = EuclideanAlgorithm.FindGreatestCommonDivisorBinaryAlgorithm(FirstNumber, SecondNumber, out time);
-        Data.Add(new ColumnHistogram("Euclidean algorithm", time));
+        Data.Add(new HistogramColumn("Euclidean algorithm", time));
 
         EuclideanAlgorithm.FindGreatestCommonDivisor(FirstNumber, SecondNumber, out time);
-        Data.Add(new ColumnHistogram("Euclidean binary algorithm", time));
+        Data.Add(new HistogramColumn("Euclidean binary algorithm", time));
 
         IsCreate = true;
     }
