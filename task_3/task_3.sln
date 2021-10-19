@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "task_3", "test_3\task_3.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "task_3.Test", "task_3.Test\task_3.Test.csproj", "{63D4AFB7-C857-4FB5-BCB6-503FC4BB96E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Histogram", "Histogram\Histogram.csproj", "{94F7EBFF-8D20-4E1C-B881-4A07DA3217A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Histogram", "Histogram\Histogram.csproj", "{94F7EBFF-8D20-4E1C-B881-4A07DA3217A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

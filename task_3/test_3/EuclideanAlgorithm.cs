@@ -48,7 +48,8 @@ namespace task_3
         public int FindGreatestCommonDivisor(int firstNumber, int secondNumber)
         {
             if ((firstNumber <= 0) || (secondNumber <= 0))
-                return 0;
+                throw new ArgumentException("Number can not be less than or equal 0");
+
 
             int max = Math.Max(firstNumber, secondNumber);
             int min = Math.Min(firstNumber, secondNumber);

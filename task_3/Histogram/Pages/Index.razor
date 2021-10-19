@@ -6,12 +6,13 @@
 
 <input @bind="@FirstNumber" />
 <input @bind="@SecondNumber" />
-<button @onclick="CreateHistogram">Начать</button>
+<button @onclick="CreateHistogram" form="/">Начать</button>
 
 @if (IsCreate)
 {
+    IsCreate = false;
     <div>Результат: @Result</div>
-    <SfChart>
+    <SfChart >
         <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category" />
 
         <ChartSeriesCollection>
@@ -23,30 +24,45 @@
         </ChartSeriesCollection>
     </SfChart>
 }
+else
+{
+    <Error Message="@Message" />
+}
 
 
 @code
 {
     public EuclideanAlgorithm EuclideanAlgorithm;
-    public List<HistogramColumn> Data = new List<HistogramColumn>();
+    public List<HistogramColumn> Data;
     public int FirstNumber;
     public int SecondNumber;
     public bool IsCreate = false;
     public int Result;
+    public string Message;
 
 
     public void CreateHistogram()
     {
         long time;
 
-        EuclideanAlgorithm = new EuclideanAlgorithm();
+        try
+        {
+            Data = new List<HistogramColumn>();
+            EuclideanAlgorithm = new EuclideanAlgorithm();
 
-        Result = EuclideanAlgorithm.FindGreatestCommonDivisorBinaryAlgorithm(FirstNumber, SecondNumber, out time);
-        Data.Add(new HistogramColumn("Euclidean algorithm", time));
+            Result = EuclideanAlgorithm.FindGreatestCommonDivisorBinaryAlgorithm(FirstNumber, SecondNumber, out time);
+            Data.Add(new HistogramColumn("Euclidean algorithm", time));
 
-        EuclideanAlgorithm.FindGreatestCommonDivisor(FirstNumber, SecondNumber, out time);
-        Data.Add(new HistogramColumn("Euclidean binary algorithm", time));
+            EuclideanAlgorithm.FindGreatestCommonDivisor(FirstNumber, SecondNumber, out time);
+            Data.Add(new HistogramColumn("Euclidean binary algorithm", time));
 
-        IsCreate = true;
+            IsCreate = true;
+
+        }
+        catch (Exception exception)
+        {
+            IsCreate = false;
+            Message = exception.Message;
+        }
     }
 }
