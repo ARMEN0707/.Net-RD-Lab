@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Polynomial.Test
 {
-    public class Tests
+    public class PolynomialTests
     {
 
         [Test]

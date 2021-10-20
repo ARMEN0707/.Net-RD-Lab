@@ -4,7 +4,7 @@ using task_5;
 
 namespace Vector.Test
 {
-    public class Tests
+    public class VectorTests
     {
         [TestCase(1, 2, 3, ExpectedResult = 3.7416573867739413)]
         [TestCase(3, -5, 3, ExpectedResult = 6.557438524302)]
