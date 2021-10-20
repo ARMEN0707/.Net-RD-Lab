@@ -12,13 +12,13 @@ namespace Task_4
                 try
                 {
                     Console.Write("Enter SideA: ");
-                    double sideA = double.Parse(Console.ReadLine());
+                    double firstSide = double.Parse(Console.ReadLine());
                     Console.Write("Enter SideB: ");
-                    double sideB = double.Parse(Console.ReadLine());
+                    double secondSide = double.Parse(Console.ReadLine());
                     Console.Write("Enter SideC: ");
-                    double sideC = double.Parse(Console.ReadLine());
+                    double thirdSide = double.Parse(Console.ReadLine());
 
-                    var treangle = new Treangle(sideA, sideB, sideC);
+                    var treangle = new Triangle(firstSide, secondSide, thirdSide);
                     Console.WriteLine("Square: " + treangle.GetSquare());
                     Console.WriteLine("Perimetr: " + treangle.GetPerimeter());
                 }
