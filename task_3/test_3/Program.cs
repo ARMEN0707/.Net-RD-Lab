@@ -12,12 +12,11 @@ namespace task_3
 
             long time;
 
-            long startTime = DateTime.Now.Ticks;
             Console.WriteLine(euclideanAlgorithm.FindGreatestCommonDivisorBinaryAlgorithm(24, 28, out time));
-            Console.WriteLine("Time: " + (startTime - time));
+            Console.WriteLine("Time Euclidean algorithm: " + time);
 
             Console.WriteLine(euclideanAlgorithm.FindGreatestCommonDivisor(24, 28, out time));
-            Console.WriteLine("Time: " + time);
+            Console.WriteLine("Time binary Euclidean algorithm: " + time);
 
             Console.ReadLine();
         }

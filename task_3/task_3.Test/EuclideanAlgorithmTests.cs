@@ -1,12 +1,11 @@
 using NUnit.Framework;
+using System;
 
 namespace task_3.Test
 {
-    public class Tests
+    public class EuclideanAlgorithmTests
     {
         [TestCase(2, 4, ExpectedResult = 2)]
-        [TestCase(0, 4, ExpectedResult = 0)]
-        [TestCase(10, -5, ExpectedResult = 0)]
         [TestCase(24, 16, ExpectedResult = 8)]
         public int FindGreatestCommonDivisor_TwoNumbers_ReturnsNumber(int firstNumber, int secondNumber)
         {
@@ -14,9 +13,15 @@ namespace task_3.Test
             return euclideanAlgorithm.FindGreatestCommonDivisor(firstNumber, secondNumber);
         }
 
+        [TestCase(10, -5)]
+        [TestCase(24, 0)]
+        public void FindGreatestCommonDivisor_TwoNumbers_ThrowArgumentException(int firstNumber, int secondNumber)
+        {
+            var euclideanAlgorithm = new EuclideanAlgorithm();
+            Assert.Throws<ArgumentException>(() => { euclideanAlgorithm.FindGreatestCommonDivisor(firstNumber, secondNumber); }, "Number can not be less than or equal 0");
+        }
+
         [TestCase(324, 111, 432, ExpectedResult = 3)]
-        [TestCase(0, 4, 45, ExpectedResult = 0)]
-        [TestCase(10, -5, 34, ExpectedResult = 0)]
         [TestCase(243, 134, 121, ExpectedResult = 1)]
         public int FindGreatestCommonDivisor_ThreeNumbers_ReturnsNumber(int firstNumber, int secondNumber, int thridNumber)
         {
@@ -25,8 +30,6 @@ namespace task_3.Test
         }
 
         [TestCase(324, 111, 432, 234, ExpectedResult = 3)]
-        [TestCase(43, 4, 0, 54, ExpectedResult = 0)]
-        [TestCase(10, 43, 214, -5, ExpectedResult = 0)]
         [TestCase(243, 134, 121, 321, ExpectedResult = 1)]
         public int FindGreatestCommonDivisor_FourNumbers_ReturnsNumber(int firstNumber, int secondNumber, int thridNumber, int fourthNumber)
         {
@@ -35,8 +38,6 @@ namespace task_3.Test
         }
 
         [TestCase(20, 16, 24, 32, 48, ExpectedResult = 4)]
-        [TestCase(0, 4, 45, 345, 0, ExpectedResult = 0)]
-        [TestCase(10, -5, 34, 532, -10, ExpectedResult = 0)]
         [TestCase(243, 134, 121, 423, 23, ExpectedResult = 1)]
         public int FindGreatestCommonDivisor_FiveNumbers_ReturnsNumber(int firstNumber, int secondNumber, int thridNumber, int fourthNumber, int fifthNumber)
         {
@@ -46,7 +47,6 @@ namespace task_3.Test
 
         [TestCase(20, 16, ExpectedResult = 4)]
         [TestCase(0, 4, ExpectedResult = 4)]
-        [TestCase(10, -5, ExpectedResult = 0)]
         [TestCase(11, 33, ExpectedResult = 11)]
         public int FindGreatestCommonDivisorBinaryAlgorithm_TwoNumbers_ReturnsNumber(int firstNumber, int secondNumber)
         {
