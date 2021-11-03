@@ -11,17 +11,17 @@ namespace Task_4
         public double FirstSide
         {
             get { return _firstSide; }
-            set { _firstSide = CheckSide(value); }
+            private set { _firstSide = CheckSide(value); }
         }
         public double SecondSide
         {
             get { return _secondSide; }
-            set { _secondSide = CheckSide(value); }
+            private set { _secondSide = CheckSide(value); }
         }
         public double ThirdSide
         {
             get { return _thirdSide; }
-            set { _thirdSide = CheckSide(value); }
+            private set { _thirdSide = CheckSide(value); }
 
         }
 
