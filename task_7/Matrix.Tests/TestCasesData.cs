@@ -4,7 +4,7 @@ using System.Text;
 using NUnit.Framework;
 using task_7;
 
-namespace Test
+namespace Tests
 {
     class TestCasesData
     {
