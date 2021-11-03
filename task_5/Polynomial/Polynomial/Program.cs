@@ -13,7 +13,7 @@ namespace Polynomial
                     Console.Write("Enter first polynomial: ");
                     string polynomial = Console.ReadLine();
                     var firstPolynomial = new Polynomial(polynomial);
-                    Console.Write("Enter first polynomial: ");
+                    Console.Write("Enter second polynomial: ");
                     polynomial = Console.ReadLine();
                     var secondPolynomial = new Polynomial(polynomial);
                     Console.WriteLine("Addition: " + (firstPolynomial + secondPolynomial));

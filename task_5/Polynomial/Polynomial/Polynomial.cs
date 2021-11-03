@@ -1,18 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Polynomial
 {
     public class Polynomial
     {
         public static double s_Epsilon = 0.00001;
-        private readonly double[] _coefficients;
+        private readonly List<Monomial> _monomials;
 
         public int Degree
         {
-            get { return _coefficients.Length; }
+            get 
+            {
+                int max = _monomials[0].Degree;
+                foreach(Monomial monomial in _monomials)
+                {
+                    if (monomial.Degree > max)
+                        max = monomial.Degree;
+                }
+                return max;
+            }
         }
 
-        public Polynomial(params double[] coefficients)
+        public Polynomial(params Monomial[] coefficients)
         {
             if (coefficients == null)
                 throw new ArgumentNullException("coefficients cannot be null.");
@@ -20,7 +30,7 @@ namespace Polynomial
             if (coefficients.Length == 0)
                 throw new ArgumentException("coefficients cannot be empty.");
 
-            _coefficients = (double[])coefficients.Clone();
+            _monomials = new List<Monomial>((Monomial[])coefficients.Clone());
         }
 
         public Polynomial(string value)
@@ -31,73 +41,73 @@ namespace Polynomial
             if (value.Length == 0)
                 throw new ArgumentException("String cannot be empty.");
 
+            _monomials = new List<Monomial>();
             string[] summands = value.Split('+');
-            _coefficients = new double[summands.Length];
             foreach (var summand in summands)
             {
                 string[] multipliers = summand.Split('*');
-                if(multipliers.Length == 1)
+                if (multipliers.Length == 1)
                 {
-                    _coefficients[0] = double.Parse(multipliers[0]);
+                    _monomials.Add(new Monomial(0, double.Parse(multipliers[0])));
+                    continue;
                 }
-                else
+                string[] degree = multipliers[1].Split('^');
+                if (degree.Length == 1)
                 {
-                    string[] degrees = multipliers[1].Split('^');
-                    if (degrees.Length == 1)
-                    {
-                        _coefficients[1] = double.Parse(multipliers[0]);
-                    }
-                    else
-                    {
-                        _coefficients[int.Parse(degrees[1])] = double.Parse(multipliers[0]);
-                    }
+                    _monomials.Add(new Monomial(1, double.Parse(multipliers[0])));
+                    continue;
                 }
+
+                _monomials.Add(new Monomial(int.Parse(degree[1]), double.Parse(multipliers[0])));
             }
         }
 
-        public double this[int index]
+        public Monomial this[int index]
         {
             get
             {
-                if (index >= 0 && index < _coefficients.Length)
-                    return _coefficients[index];
+                if (index >= 0 && index < _monomials.Count)
+                    return _monomials[index];
                 else
                     throw new ArgumentOutOfRangeException("index is not a valid");
             }
 
             private set
             {
-                if (index >= 0 && index < _coefficients.Length)
-                    _coefficients[index] = value;
+                if (index >= 0 && index < _monomials.Count)
+                    _monomials[index] = value;
                 else
                     throw new ArgumentOutOfRangeException("index is not a valid");
             }
         }
+        //5*x^2+6*x^4
+        //4+5*x+3*x^2
 
         public static Polynomial operator +(Polynomial leftPolynimial, Polynomial rightPolynimial)
         {
             if (leftPolynimial == null || rightPolynimial == null)
                 throw new ArgumentNullException("Polynomial cannot be null");
 
-            double[] newCoefficients;
-            int size = Math.Max(leftPolynimial._coefficients.Length, rightPolynimial._coefficients.Length);
-            newCoefficients = new double[size];
+            var newCoefficients = new List<Monomial>(rightPolynimial._monomials);
 
-            for (int i = 0; i < size; i++)
+            foreach(var leftMonomial in leftPolynimial._monomials)
             {
-                double a = 0;
-                double b = 0;
+                bool isFind = false;
+                foreach (var rightMonomial in rightPolynimial._monomials)
+                {
+                    if(leftMonomial.Degree == rightMonomial.Degree)
+                    {
+                        newCoefficients.Remove(rightMonomial);
+                        newCoefficients.Add(leftMonomial + rightMonomial);
+                        isFind = true;
+                    }
+                }
 
-                if (i < leftPolynimial._coefficients.Length)
-                    a = leftPolynimial[i];
-
-                if (i < rightPolynimial._coefficients.Length)
-                    b = rightPolynimial[i];
-
-                newCoefficients[i] = a + b;
+                if(!isFind)
+                    newCoefficients.Add(leftMonomial);
             }
 
-            return new Polynomial(newCoefficients);
+            return new Polynomial(newCoefficients.ToArray());
         }
 
         public static Polynomial operator -(Polynomial leftPolynimial, Polynomial rightPolynimial)
@@ -105,25 +115,26 @@ namespace Polynomial
             if (leftPolynimial == null || rightPolynimial == null)
                 throw new ArgumentNullException("Polynomial cannot be null");
 
-            double[] newCoefficients;
-            int size = Math.Max(leftPolynimial._coefficients.Length, rightPolynimial._coefficients.Length);
-            newCoefficients = new double[size];
+            var newCoefficients = new List<Monomial>(leftPolynimial._monomials);
 
-            for (int i = 0; i < size; i++)
+            foreach (var rightMonomial in rightPolynimial._monomials)
             {
-                double a = 0;
-                double b = 0;
+                bool isFind = false;
+                foreach (var leftMonomial in leftPolynimial._monomials)
+                {
+                    if (leftMonomial.Degree == rightMonomial.Degree)
+                    {
+                        newCoefficients.Add(leftMonomial - rightMonomial);
+                        newCoefficients.Remove(leftMonomial);
+                        isFind = true;
+                    }
+                }
 
-                if (i < leftPolynimial._coefficients.Length)
-                    a = leftPolynimial[i];
-
-                if (i < rightPolynimial._coefficients.Length)
-                    b = rightPolynimial[i];
-
-                newCoefficients[i] = a - b;
+                if (!isFind)
+                    newCoefficients.Add(new Monomial(rightMonomial.Degree, -rightMonomial.Coefficient));
             }
 
-            return new Polynomial(newCoefficients);
+            return new Polynomial(newCoefficients.ToArray());
         }
 
         public static Polynomial operator *(Polynomial leftPolynimial, Polynomial rightPolynimial)
@@ -131,18 +142,26 @@ namespace Polynomial
             if (leftPolynimial == null || rightPolynimial == null)
                 throw new ArgumentNullException("Polynomial cannot be null");
 
-            double[] newCoefficients = new double[leftPolynimial._coefficients.Length + rightPolynimial._coefficients.Length - 1];
-            for (int i = 0; i < leftPolynimial._coefficients.Length; i++)
+            var newCoefficients = new List<Monomial>();
+
+            foreach (var leftMonomial in leftPolynimial._monomials)
             {
-                for (int j = 0; j < rightPolynimial._coefficients.Length; j++)
-                {
-                    double number = leftPolynimial[i] * rightPolynimial[j];
-                    int degrees = i + j;
-                    newCoefficients[degrees] += number;
+                foreach (var rightMonomial in rightPolynimial._monomials)
+                {               
+                    if(leftMonomial.Coefficient != 0 && rightMonomial.Coefficient != 0)
+                    {
+                        Monomial newMonomial = leftMonomial * rightMonomial;
+                        int index = newCoefficients.FindIndex(monomial => monomial.Degree == newMonomial.Degree);
+                        if (index != -1)
+                            newCoefficients[index].Coefficient += newMonomial.Coefficient;
+                        else
+                            newCoefficients.Add(newMonomial);
+                    }
+
                 }
             }
 
-            return new Polynomial(newCoefficients);
+            return new Polynomial(newCoefficients.ToArray());
         }
 
         public static bool operator ==(Polynomial leftPolynimial, Polynomial rightPolynimial)
@@ -154,11 +173,20 @@ namespace Polynomial
                 return (object)rightPolynimial == null;
 
 
-            if (leftPolynimial._coefficients.Length == rightPolynimial._coefficients.Length)
+            if (leftPolynimial._monomials.Count == rightPolynimial._monomials.Count)
             {
-                for (int i = 0; i < rightPolynimial._coefficients.Length; i++)
+                foreach (var leftMonomial in leftPolynimial._monomials)
                 {
-                    if (Math.Abs(leftPolynimial[i] - rightPolynimial[i]) >= s_Epsilon)
+                    bool isFind = false;
+                    foreach (var rightMonomial in rightPolynimial._monomials)
+                    {
+                        if (leftMonomial == rightMonomial)
+                        {
+                            isFind = true;
+                            break;
+                        }
+                    }
+                    if (!isFind)
                         return false;
                 }
 
@@ -205,41 +233,34 @@ namespace Polynomial
 
         public override int GetHashCode()
         {
-            int hash = 0;
-            foreach (double number in _coefficients)
-            {
-                hash &= number.GetHashCode();
-            }
-
-            return hash;
+            return base.GetHashCode();
         }
 
         public override string ToString()
         {
             string text = null;
-            for (int i = _coefficients.Length - 1; i > 0; i--)
-            {
-                double a = _coefficients[i];
-                text += i == 1 ? a + "*x" : a + "*x^" + i;
 
-                if (_coefficients[i - 1] > 0)
+            for (int i = _monomials.Count - 1; i > 0; i--)
+            {
+                text += _monomials[i].ToString();
+
+                if (_monomials[i - 1].Coefficient > 0 && _monomials[i].ToString().Length != 0)
                 {
                     text += "+";
                 }
             }
 
-            text += _coefficients[0];
+            text += _monomials[0];
 
             return text;
         }
 
         public double CalculateValue(double x)
         {
-            double number = _coefficients[0];
-            for (int i = _coefficients.Length - 1; i > 0; i--)
+            double number = 0;
+            foreach(var monomial in _monomials)
             {
-                double a = _coefficients[i];
-                number += i == 1 ? a * x : a * Math.Pow(x, i);
+                number += monomial.CalculateValue(x);
             }
 
             return number;
@@ -247,7 +268,9 @@ namespace Polynomial
 
         public object Clone()
         {
-            return new Polynomial((double[])_coefficients.Clone());
+            Monomial[] cloneMonomials = new Monomial[_monomials.Count];
+            _monomials.CopyTo(cloneMonomials);
+            return new Polynomial(cloneMonomials);
         }
     }
 }

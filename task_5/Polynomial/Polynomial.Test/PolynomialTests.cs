@@ -10,12 +10,12 @@ namespace Polynomial.Test
         [Test]
         public void Constructor_ArrayIsNull_ThrowArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => { var polynomial = new Polynomial((double[])null); }, "Coefficients cannot be null.");
+            Assert.Throws<ArgumentNullException>(() => { var polynomial = new Polynomial((Monomial[])null); }, "Coefficients cannot be null.");
         }
 
         [Test]
         public void Constructor_ArrayIsEmpty_ThrowArgumentException()
-            => Assert.Throws<ArgumentException>(() => { var polynomial = new Polynomial(Array.Empty<double>()); }, "Coefficients cannot be empty.");
+            => Assert.Throws<ArgumentException>(() => { var polynomial = new Polynomial(Array.Empty<Monomial>()); }, "Coefficients cannot be empty.");
 
         public void Constructor_StringIsNull_ThrowArgumentNullException()
         {
@@ -27,7 +27,7 @@ namespace Polynomial.Test
             => Assert.Throws<ArgumentException>(() => { var polynomial = new Polynomial(""); }, "String cannot be empty.");
 
         [Test]
-        public void Constructor_ArrayIsNull_ThrowArgumentException() => Assert.Throws<ArgumentNullException>(() => new Polynomial((double[])null));
+        public void Constructor_ArrayIsNull_ThrowArgumentException() => Assert.Throws<ArgumentNullException>(() => new Polynomial((Monomial[])null));
 
         [TestCaseSource(typeof(TestCasesData), nameof(TestCasesData.TestCasesForEquals))]
         public bool Equals_Object_ReturnsBollean(Polynomial polynomial, object obj) => polynomial.Equals(obj);
@@ -99,7 +99,7 @@ namespace Polynomial.Test
         }
 
         [TestCaseSource(typeof(TestCasesData), nameof(TestCasesData.TestCasesForIndexer))]
-        public double Indexer_IndexCoefficient_ReturnCoefficient(Polynomial polynomial, int index) => polynomial[index];
+        public double Indexer_IndexCoefficient_ReturnCoefficient(Polynomial polynomial, int index) => polynomial[index].Coefficient;
 
         [TestCaseSource(typeof(TestCasesData), nameof(TestCasesData.TestCasesForIndexerException))]
         public void Indexer_IndexCoefficient_ThrowArgumentOutOfRangeException(Polynomial polynomial, int index)
