@@ -2,18 +2,18 @@
 using System.IO;
 using System.Threading;
 
-namespace Zad_2_3
+namespace Exercise_2_3
 {
-    class DecorateStream : Stream
+    class DecorativeStream : Stream
     {
         private Stream _stream;
         private float _numberReadByte;
         private string _password = "password";
-        public DecorateStream(string nameFile)
+        public DecorativeStream(string nameFile)
         {
             Console.Write("Введите пароль для чтения файла: ");
-            string password = Console.ReadLine();
-            if (password == _password)
+            string userPassword = Console.ReadLine();
+            if (userPassword == _password)
                 _stream = new FileStream(nameFile, FileMode.Open);
             else
                 throw new FieldAccessException();
@@ -23,7 +23,7 @@ namespace Zad_2_3
         {
             int countByte = _stream.Read(buffer, offset, count);
             _numberReadByte += countByte;
-            int procent = (int)(_numberReadByte / Length * 100) ;
+            int procent = (int)(_numberReadByte / Length * 100);
             Console.SetCursorPosition(0, 0);
             Console.WriteLine("Ожидание чтения файла.");
             Console.WriteLine("Выполнено {0}%", procent);
@@ -75,28 +75,6 @@ namespace Zad_2_3
         public override void Write(byte[] buffer, int offset, int count)
         {
             _stream.Write(buffer, offset, count);
-        }
-    }
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            try
-            {
-                DecorateStream decorateStream = new DecorateStream("file.txt");
-                byte[] bytes = new byte[100];
-                while (decorateStream.Read(bytes, 0, 20) != 0) ;
-            }
-            catch(FileNotFoundException)
-            {
-                Console.WriteLine("File is not exists.");
-            }
-            catch(FieldAccessException)
-            {
-                Console.WriteLine("Incorrect password.");
-            }
-            Console.ReadLine();
         }
     }
 }

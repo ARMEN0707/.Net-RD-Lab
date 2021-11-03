@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Zad_1
+namespace Exercise_1
 {
     class ProgramHelper : ProgramConverter, ICodeChecke
     {
