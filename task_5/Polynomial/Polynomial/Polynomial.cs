@@ -5,7 +5,6 @@ namespace Polynomial
 {
     public class Polynomial
     {
-        public static double s_Epsilon = 0.00001;
         private readonly List<Monomial> _monomials;
 
         public int Degree
@@ -43,22 +42,16 @@ namespace Polynomial
 
             _monomials = new List<Monomial>();
             string[] summands = value.Split('+');
+            double coefficient;
+            int monomialDegree;
             foreach (var summand in summands)
             {
                 string[] multipliers = summand.Split('*');
-                if (multipliers.Length == 1)
-                {
-                    _monomials.Add(new Monomial(0, double.Parse(multipliers[0])));
-                    continue;
-                }
-                string[] degree = multipliers[1].Split('^');
-                if (degree.Length == 1)
-                {
-                    _monomials.Add(new Monomial(1, double.Parse(multipliers[0])));
-                    continue;
-                }
+                coefficient = multipliers.Length == 1 ? 1 : double.Parse(multipliers[0]);
+                string[] degree = multipliers.Length == 1 ? multipliers[0].Split('^') : multipliers[1].Split('^');
+                monomialDegree = degree.Length == 1 ? 1 : int.Parse(degree[1]);
 
-                _monomials.Add(new Monomial(int.Parse(degree[1]), double.Parse(multipliers[0])));
+                _monomials.Add(new Monomial(monomialDegree, coefficient));
             }
         }
 
@@ -229,11 +222,6 @@ namespace Polynomial
         public bool Equals(Polynomial other)
         {
             return this == other;
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
         }
 
         public override string ToString()

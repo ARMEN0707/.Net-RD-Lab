@@ -3,7 +3,10 @@ namespace Polynomial
 {
     public class Monomial
     {
-        public static double s_Epsilon = 0.00001;
+        public double Epsilon
+        {
+            get { return 0.00001; }
+        }
         public int Degree;
         public double Coefficient;
 
@@ -55,7 +58,7 @@ namespace Polynomial
                 return (object)rightMonomial == null;
 
             if (leftMonomial.Degree == rightMonomial.Degree)
-                if (Math.Abs(leftMonomial.Coefficient - rightMonomial.Coefficient) <= s_Epsilon)
+                if (Math.Abs(leftMonomial.Coefficient - rightMonomial.Coefficient) <= leftMonomial.Epsilon)
                     return true;
 
             return false;
@@ -76,42 +79,30 @@ namespace Polynomial
             return false;
         }
 
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
         public override string ToString()
-        {            
+        {
+            string text = "";
             if(Coefficient != 0 && Coefficient != 1 && Coefficient != -1)
             {
-                if (Degree == 0)
-                    return Coefficient.ToString();
-                if (Degree == 1)
-                    return Coefficient + "*x";
-
-                return Coefficient + "*x^" + Degree;
+                text += Coefficient.ToString();
+                if (Degree != 0)
+                    text += Degree == 1 ? "*x" : "*x^" + Degree;
             }
             else
             {
-                if (Coefficient == 0)
-                    return "";
-                if(Coefficient == 1)
+                if (Coefficient != 0)
                 {
                     if (Degree == 0)
-                        return "1";
-                    if (Degree == 1)
-                        return "x";
-                }
-                if(Coefficient == -1)
-                {
-                    if (Degree == 0)
-                        return "-1";
-                    if (Degree == 1)
-                        return "-x";
+                        text += "1";
+                    else
+                        text += Degree == 1 ? "x" : "x^" + Degree;
+
+                    if (Coefficient < 0)
+                        text = "-" + text;
                 }
             }
 
-            return "";
+            return text;
         }
 
         public double CalculateValue(double x)
