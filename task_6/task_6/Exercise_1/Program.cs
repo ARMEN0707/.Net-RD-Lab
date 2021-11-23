@@ -11,7 +11,7 @@ namespace Exercise_1
             programConverters[1] = new ProgramHelper();
             programConverters[2] = new ProgramHelper();
 
-            foreach(ProgramConverter item in programConverters)
+            foreach(var item in programConverters)
             {
                 string vbCode = item.ConvertToVB("CSharpCode");
                 Console.WriteLine(vbCode);
@@ -21,7 +21,7 @@ namespace Exercise_1
 
                 if (item is ProgramHelper)
                 {
-                    ProgramHelper programHelper = item as ProgramHelper;
+                    var programHelper = item as ProgramHelper;
                     if (programHelper.CodeCheckSyntax(vbCode, "VisualBasic"))
                         Console.WriteLine("Verification VisualBasic is successful.");
 

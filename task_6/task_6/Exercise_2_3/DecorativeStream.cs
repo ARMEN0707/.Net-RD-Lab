@@ -9,10 +9,8 @@ namespace Exercise_2_3
         private Stream _stream;
         private float _numberReadByte;
         private string _password = "password";
-        public DecorativeStream(string nameFile)
+        public DecorativeStream(string nameFile, string userPassword)
         {
-            Console.Write("Введите пароль для чтения файла: ");
-            string userPassword = Console.ReadLine();
             if (userPassword == _password)
                 _stream = new FileStream(nameFile, FileMode.Open);
             else

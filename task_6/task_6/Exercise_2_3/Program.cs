@@ -10,7 +10,9 @@ namespace Exercise_2_3
         {
             try
             {
-                DecorativeStream decorativeStream = new DecorativeStream("file.txt");
+                Console.Write("Введите пароль для чтения файла: ");
+                string userPassword = Console.ReadLine();
+                var decorativeStream = new DecorativeStream("file.txt", userPassword);
                 byte[] bytes = new byte[100];
                 while (decorativeStream.Read(bytes, 0, 20) != 0) ;
             }
