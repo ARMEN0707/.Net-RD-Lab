@@ -3,12 +3,9 @@ namespace Polynomial
 {
     public class Monomial
     {
-        public double Epsilon
-        {
-            get { return 0.00001; }
-        }
-        public int Degree;
-        public double Coefficient;
+        public const double Epsilon = 0.00001;
+        public int Degree { get; set; }
+        public double Coefficient { get; set; }
 
         public Monomial(int degree, double coefficient)
         {
@@ -58,7 +55,7 @@ namespace Polynomial
                 return (object)rightMonomial == null;
 
             if (leftMonomial.Degree == rightMonomial.Degree)
-                if (Math.Abs(leftMonomial.Coefficient - rightMonomial.Coefficient) <= leftMonomial.Epsilon)
+                if (Math.Abs(leftMonomial.Coefficient - rightMonomial.Coefficient) <= Monomial.Epsilon)
                     return true;
 
             return false;
@@ -84,22 +81,19 @@ namespace Polynomial
             string text = "";
             if(Coefficient != 0 && Coefficient != 1 && Coefficient != -1)
             {
-                text += Coefficient.ToString();
-                if (Degree != 0)
-                    text += Degree == 1 ? "*x" : "*x^" + Degree;
+                text += Coefficient.ToString() + "*x^" + Degree;
+                return text;
             }
-            else
-            {
-                if (Coefficient != 0)
-                {
-                    if (Degree == 0)
-                        text += "1";
-                    else
-                        text += Degree == 1 ? "x" : "x^" + Degree;
 
-                    if (Coefficient < 0)
-                        text = "-" + text;
-                }
+            if (Coefficient != 0)
+            {
+                if (Degree == 0)
+                    text += "1";
+                else
+                    text += "x^" + Degree;
+
+                if (Coefficient < 0)
+                    text = "-" + text;
             }
 
             return text;
