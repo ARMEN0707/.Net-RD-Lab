@@ -10,7 +10,6 @@ namespace task_7
         private double[,] _elements;
         public int Row { get; }
         public int Column { get; }
-
         public Matrix(int row, int column, params double[] elements)
         {
             if (elements.Length != row * column)
@@ -39,7 +38,7 @@ namespace task_7
 
                 return _elements[row, column];
             }
-            private set
+            set
             {
                 if (row < 0 || column < 0 || row >= Row || column >= Column || Row == 0 || Column == 0)
                     throw new ArgumentOutOfRangeException("Index is not a valid");
