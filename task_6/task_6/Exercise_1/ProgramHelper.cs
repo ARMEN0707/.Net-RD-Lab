@@ -11,10 +11,8 @@ namespace Exercise_1
             switch(language)
             {
                 case "CSharp":
-                    Console.WriteLine("Check CSharp code.");
                     return true;
                 case "VisualBasic":
-                    Console.WriteLine("Check VisualBasic code.");
                     return true;
             }
             return false;

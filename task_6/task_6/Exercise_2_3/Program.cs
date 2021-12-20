@@ -14,7 +14,14 @@ namespace Exercise_2_3
                 string userPassword = Console.ReadLine();
                 var decorativeStream = new DecorativeStream("file.txt", userPassword);
                 byte[] bytes = new byte[100];
-                while (decorativeStream.Read(bytes, 0, 20) != 0) ;
+                Console.Clear();
+                while (decorativeStream.Read(bytes, 0, 20) != 0)
+                {
+                    Console.SetCursorPosition(0, 0);
+                    Console.WriteLine("Ожидание чтения файла.");
+                    Console.WriteLine("Выполнено {0}%", decorativeStream.PercentageRead);
+                    Thread.Sleep(100);
+                }
             }
             catch(FileNotFoundException)
             {

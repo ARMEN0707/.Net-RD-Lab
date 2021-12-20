@@ -9,6 +9,7 @@ namespace Exercise_2_3
         private Stream _stream;
         private float _numberReadByte;
         private string _password = "password";
+        public int PercentageRead { get; private set; }
         public DecorativeStream(string nameFile, string userPassword)
         {
             if (userPassword == _password)
@@ -21,11 +22,7 @@ namespace Exercise_2_3
         {
             int countByte = _stream.Read(buffer, offset, count);
             _numberReadByte += countByte;
-            int procent = (int)(_numberReadByte / Length * 100);
-            Console.SetCursorPosition(0, 0);
-            Console.WriteLine("Ожидание чтения файла.");
-            Console.WriteLine("Выполнено {0}%", procent);
-            Thread.Sleep(100);
+            PercentageRead = (int)(_numberReadByte / Length * 100);
             return countByte;
         }
 
