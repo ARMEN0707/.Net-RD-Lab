@@ -13,26 +13,25 @@ namespace Polynomial
             Coefficient = coefficient;
         }
 
-        public static Monomial operator +(Monomial leftMonomial, Monomial rightMonomial)
+        public void CheckMonomial(Monomial monomial)
         {
-            if (leftMonomial == null || rightMonomial == null)
+            if (this == null || monomial == null)
                 throw new ArgumentNullException("Monomial cannot be null");
 
-            if (leftMonomial.Degree == rightMonomial.Degree)
-                return new Monomial(leftMonomial.Degree, leftMonomial.Coefficient + rightMonomial.Coefficient);
-            else
+            if (this.Degree != monomial.Degree)
                 throw new ArgumentException("Different degree");
+        }
+
+        public static Monomial operator +(Monomial leftMonomial, Monomial rightMonomial)
+        {
+            leftMonomial.CheckMonomial(rightMonomial);
+            return new Monomial(leftMonomial.Degree, leftMonomial.Coefficient + rightMonomial.Coefficient);
         }
 
         public static Monomial operator -(Monomial leftMonomial, Monomial rightMonomial)
         {
-            if (leftMonomial == null || rightMonomial == null)
-                throw new ArgumentNullException("Monomial cannot be null");
-
-            if (leftMonomial.Degree == rightMonomial.Degree)
-                return new Monomial(leftMonomial.Degree, leftMonomial.Coefficient - rightMonomial.Coefficient);
-            else
-                throw new ArgumentException("Different degree");
+            leftMonomial.CheckMonomial(rightMonomial);
+            return new Monomial(leftMonomial.Degree, leftMonomial.Coefficient - rightMonomial.Coefficient);
         }
 
         public static Monomial operator *(Monomial leftMonomial, Monomial rightMonomial)
@@ -85,16 +84,11 @@ namespace Polynomial
                 return text;
             }
 
-            if (Coefficient != 0)
-            {
-                if (Degree == 0)
-                    text += "1";
-                else
-                    text += "x^" + Degree;
+            if (Coefficient != 0)                         
+                text += "x^" + Degree;
 
-                if (Coefficient < 0)
-                    text = "-" + text;
-            }
+            if (Coefficient < 0)
+                text = "-" + text;
 
             return text;
         }

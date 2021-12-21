@@ -23,22 +23,13 @@ namespace Polynomial
 
         public Polynomial(params Monomial[] coefficients)
         {
-            if (coefficients == null)
-                throw new ArgumentNullException("coefficients cannot be null.");
-
-            if (coefficients.Length == 0)
-                throw new ArgumentException("coefficients cannot be empty.");
-
+            CheckPolynomial(coefficients);
             _monomials = new List<Monomial>((Monomial[])coefficients.Clone());
         }
 
         public Polynomial(string value)
         {
-            if (value == null)
-                throw new ArgumentNullException("String cannot be null.");
-
-            if (value.Length == 0)
-                throw new ArgumentException("String cannot be empty.");
+            CheckPolynomial(value);
 
             _monomials = new List<Monomial>();
             string[] summands = value.Split('+');
@@ -75,6 +66,18 @@ namespace Polynomial
         }
         //5*x^2+6*x^4
         //4+5*x+3*x^2
+
+        public void CheckPolynomial(object polynomial)
+        {
+            if (polynomial == null)
+                throw new ArgumentNullException("Polynomial cannot be null.");
+
+            if ((polynomial is string stringMonomial) && stringMonomial.Length == 0)
+                throw new ArgumentException("Polynomial cannot be empty.");
+
+            if ((polynomial is Monomial[] arrayMonomial) && arrayMonomial.Length == 0)
+                throw new ArgumentException("Polynomial cannot be empty.");
+        }
 
         public static Polynomial operator +(Polynomial leftPolynimial, Polynomial rightPolynimial)
         {
