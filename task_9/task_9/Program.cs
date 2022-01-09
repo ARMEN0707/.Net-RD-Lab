@@ -9,9 +9,9 @@ namespace task_9
             string nameTimer = "Clock"; 
             TimerNotifier timerNotifier = new TimerNotifier(new Timer(nameTimer, 100));
             timerNotifier.InitTimer(
-                (string name , int numberTick) => Console.WriteLine($"Start timer " + name + ", total " + numberTick + " ticks"),
+                (string name , int numberTicks) => Console.WriteLine($"Start timer " + name + ", total " + numberTicks + " ticks"),
                 (string name) => Console.WriteLine($"Stop timer "+ name),
-                (string name, int numberTick) => Console.WriteLine($"Timer " + name + ", remains " + numberTick + " ticks")
+                (string name, int numberTicks) => Console.WriteLine($"Timer " + name + ", remains " + numberTicks + " ticks")
                 );
             timerNotifier.Run();
         }

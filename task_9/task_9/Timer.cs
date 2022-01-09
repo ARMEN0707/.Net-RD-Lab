@@ -12,42 +12,31 @@ namespace task_9
         public event Action<string, int> TickEvent;
 
         private string _name;
-        private int _numberTick;
+        private int _numberTicks;
 
         public string Name
         {
             get{ return _name; }
-
             set
             {
                 if (value == null)
-                {
-                    string message = "Name canot be null";
-                    throw new ArgumentException(message);
-                }
+                    throw new ArgumentException("Name canot be null");
 
                 if (value.Length == 0)
-                {
-                    string message = "Name canot be empty";
-                    throw new ArgumentException(message);
-                }
+                    throw new ArgumentException("Name canot be empty");
 
                 _name = value;
             }
         }
         public int NumberTik
         {
-            get { return _numberTick; }
-
+            get { return _numberTicks; }
             set
             {
                 if (value <= 0)
-                {
-                    string message = "NumberTik more that 0";
-                    throw new ArgumentException(message);
-                }
+                    throw new ArgumentException("NumberTik more that 0");
 
-                _numberTick = value;
+                _numberTicks = value;
             }
         }
 

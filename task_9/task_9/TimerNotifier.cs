@@ -13,11 +13,11 @@ namespace task_9
             _timer = timer;
         }
 
-        public void InitTimer(Action<string, int> startDelegate, Action<string> stopDelegate, Action<string, int> tickDelegate)
+        public void InitTimer(Action<string, int> startEventHandler, Action<string> stopEventHandler, Action<string, int> tickEventHandler)
         {
-            _timer.StartEvent += startDelegate;
-            _timer.StopEvent += stopDelegate;
-            _timer.TickEvent += tickDelegate;
+            _timer.StartEvent += startEventHandler;
+            _timer.StopEvent += stopEventHandler;
+            _timer.TickEvent += tickEventHandler;
         }
 
         public void Run()
