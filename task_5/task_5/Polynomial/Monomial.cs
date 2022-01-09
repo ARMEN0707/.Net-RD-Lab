@@ -78,17 +78,8 @@ namespace Polynomial
         public override string ToString()
         {
             string text = "";
-            if(Coefficient != 0 && Coefficient != 1 && Coefficient != -1)
-            {
-                text += Coefficient.ToString() + "*x^" + Degree;
-                return text;
-            }
 
-            if (Coefficient != 0)                         
-                text += "x^" + Degree;
-
-            if (Coefficient < 0)
-                text = "-" + text;
+            text += Coefficient.ToString("+#.##;-#.##") + "*x^" + Degree;
 
             return text;
         }

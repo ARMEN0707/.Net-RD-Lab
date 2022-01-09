@@ -229,21 +229,14 @@ namespace Polynomial
 
         public override string ToString()
         {
-            string text = null;
+            string text = "";
 
-            for (int i = _monomials.Count - 1; i > 0; i--)
+            for (int i = _monomials.Count - 1; i >= 0; i--)
             {
                 text += _monomials[i].ToString();
-
-                if (_monomials[i - 1].Coefficient > 0 && _monomials[i].ToString().Length != 0)
-                {
-                    text += "+";
-                }
             }
 
-            text += _monomials[0];
-
-            return text;
+            return text == "" ? "0" : text;
         }
 
         public double CalculateValue(double x)
