@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Zad_1
+namespace Exercise_1
 {
-    interface ICodeChecke
+    interface ICodeChecker
     {
         bool CodeCheckSyntax(string code, string language);
     }
