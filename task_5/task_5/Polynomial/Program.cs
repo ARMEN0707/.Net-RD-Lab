@@ -19,7 +19,6 @@ namespace Polynomial
                     Console.WriteLine("Addition: " + (firstPolynomial + secondPolynomial));
                     Console.WriteLine("Subtraction: " + (firstPolynomial - secondPolynomial));
                     Console.WriteLine("Multiplication: " + (firstPolynomial * secondPolynomial));
-
                 }
                 catch(Exception exception)
                 {

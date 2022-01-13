@@ -67,6 +67,33 @@ namespace Polynomial
         //5*x^2+6*x^4
         //4+5*x+3*x^2
 
+        private static Polynomial CalculatePolynomial(Polynomial leftPolynimial, Polynomial rightPolynimial, Func<Monomial, Monomial, Monomial> calculate, Action<List<Monomial>, Monomial> addMonomial = null)
+        {
+            if (leftPolynimial == null || rightPolynimial == null)
+                throw new ArgumentNullException("Polynomial cannot be null");
+
+            var newCoefficients = new List<Monomial>(leftPolynimial._monomials);
+
+            foreach (var rightMonomial in rightPolynimial._monomials)
+            {
+                bool isFind = false;
+                foreach (var leftMonomial in leftPolynimial._monomials)
+                {
+                    if (leftMonomial.Degree == rightMonomial.Degree)
+                    {
+                        newCoefficients.Remove(leftMonomial);
+                        newCoefficients.Add(calculate(leftMonomial, rightMonomial));
+                        isFind = true;
+                    }
+                }
+
+                if (!isFind)
+                    addMonomial(newCoefficients, rightMonomial);
+            }
+
+            return new Polynomial(newCoefficients.ToArray());
+        }
+
         public void CheckPolynomial(object polynomial)
         {
             if (polynomial == null)
@@ -81,56 +108,21 @@ namespace Polynomial
 
         public static Polynomial operator +(Polynomial leftPolynimial, Polynomial rightPolynimial)
         {
-            if (leftPolynimial == null || rightPolynimial == null)
-                throw new ArgumentNullException("Polynomial cannot be null");
-
-            var newCoefficients = new List<Monomial>(rightPolynimial._monomials);
-
-            foreach(var leftMonomial in leftPolynimial._monomials)
-            {
-                bool isFind = false;
-                foreach (var rightMonomial in rightPolynimial._monomials)
-                {
-                    if(leftMonomial.Degree == rightMonomial.Degree)
-                    {
-                        newCoefficients.Remove(rightMonomial);
-                        newCoefficients.Add(leftMonomial + rightMonomial);
-                        isFind = true;
-                    }
-                }
-
-                if(!isFind)
-                    newCoefficients.Add(leftMonomial);
-            }
-
-            return new Polynomial(newCoefficients.ToArray());
+            return CalculatePolynomial(
+                leftPolynimial, 
+                rightPolynimial, 
+                (leftMonomial, rightMonomial) => leftMonomial + rightMonomial, 
+                (coefficients, monomial) => coefficients.Add(monomial));
         }
 
         public static Polynomial operator -(Polynomial leftPolynimial, Polynomial rightPolynimial)
         {
-            if (leftPolynimial == null || rightPolynimial == null)
-                throw new ArgumentNullException("Polynomial cannot be null");
-
-            var newCoefficients = new List<Monomial>(leftPolynimial._monomials);
-
-            foreach (var rightMonomial in rightPolynimial._monomials)
-            {
-                bool isFind = false;
-                foreach (var leftMonomial in leftPolynimial._monomials)
-                {
-                    if (leftMonomial.Degree == rightMonomial.Degree)
-                    {
-                        newCoefficients.Add(leftMonomial - rightMonomial);
-                        newCoefficients.Remove(leftMonomial);
-                        isFind = true;
-                    }
-                }
-
-                if (!isFind)
-                    newCoefficients.Add(new Monomial(rightMonomial.Degree, -rightMonomial.Coefficient));
-            }
-
-            return new Polynomial(newCoefficients.ToArray());
+            return CalculatePolynomial(
+                leftPolynimial, 
+                rightPolynimial, 
+                (leftMonomial, rightMonomial) => leftMonomial - rightMonomial, 
+                (coefficients, monomial) => coefficients.Add(new Monomial(monomial.Degree, -monomial.Coefficient))
+                );
         }
 
         public static Polynomial operator *(Polynomial leftPolynimial, Polynomial rightPolynimial)
