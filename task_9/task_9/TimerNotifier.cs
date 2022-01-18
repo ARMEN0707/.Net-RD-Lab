@@ -11,18 +11,18 @@ namespace task_9
         public TimerNotifier(Timer timer)
         {
             _timer = timer;
+            InitTimer(
+                (sender, e) => Console.WriteLine($"Start timer " + e.Name + ", total " + e.NumberTicks + " ticks"),
+                (sender, e) => Console.WriteLine($"Stop timer " + e.Name),
+                (sender, e) => Console.WriteLine($"Timer " + e.Name + ", remains " + e.NumberTicks + " ticks")
+                );
         }
 
-        public void InitTimer(Action<string, int> startEventHandler, Action<string> stopEventHandler, Action<string, int> tickEventHandler)
+        private void InitTimer(EventHandler<TimerEventArgs> startEventHandler, EventHandler<TimerEventArgs> stopEventHandler, EventHandler<TimerEventArgs> tickEventHandler)
         {
             _timer.StartEvent += startEventHandler;
             _timer.StopEvent += stopEventHandler;
             _timer.TickEvent += tickEventHandler;
-        }
-
-        public void Run()
-        {
-            _timer.Start();
         }
     }
 }
