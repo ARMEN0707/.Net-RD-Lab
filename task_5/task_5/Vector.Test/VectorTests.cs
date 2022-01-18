@@ -4,31 +4,31 @@ using task_5;
 
 namespace Vector.Test
 {
-    public class Tests
+    public class VectorTests
     {
-        [TestCase(1, 2, 3, ExpectedResult = 3.7416573867739413f)]
-        [TestCase(3, -5, 3, ExpectedResult = 6.557438524302f)]
-        [TestCase(1, 0, 6, ExpectedResult = 6.082762530298219f)]
-        public float LengthPropertyTest(int x, int y, int z)
+        [TestCase(1, 2, 3, ExpectedResult = 3.7416573867739413)]
+        [TestCase(3, -5, 3, ExpectedResult = 6.557438524302)]
+        [TestCase(1, 0, 6, ExpectedResult = 6.082762530298219)]
+        public double LengthPropertyTest(int x, int y, int z)
         {
             task_5.Vector vector = new task_5.Vector(x, y, z);
             return vector.Length;
         }
 
         [TestCaseSource(typeof(TestCasesData), nameof(TestCasesData.TestCasesForEquals))]
-        public bool EqualsWithObjectParameter(task_5.Vector vector, object obj) => vector.Equals(obj);
+        public bool Equals_Object_ReturnsBoolean(task_5.Vector vector, object obj) => vector.Equals(obj);
 
         [TestCaseSource(typeof(TestCasesData), nameof(TestCasesData.TestCasesForEquals))]
-        public bool EqualsWithVectorParameter(task_5.Vector vector, task_5.Vector other) => vector.Equals(other);
+        public bool Equals_Vector_ReturnsBoolean(task_5.Vector vector, task_5.Vector other) => vector.Equals(other);
 
         [TestCaseSource(typeof(TestCasesData), nameof(TestCasesData.TestCasesForEquals))]
-        public bool OperatorEqual(task_5.Vector lVector, task_5.Vector rVector) => lVector == rVector;
+        public bool OperatorEqual_Vector_ReturnsBoolean(task_5.Vector lVector, task_5.Vector rVector) => lVector == rVector;
 
         [TestCaseSource(typeof(TestCasesData), nameof(TestCasesData.TestCasesForEquals))]
-        public bool OperatorNotEqualTests(task_5.Vector lVector, task_5.Vector rVector) => !(lVector != rVector);
+        public bool OperatorNotEqual_Vector_ReturnsBoolean(task_5.Vector lVector, task_5.Vector rVector) => !(lVector != rVector);
 
         [TestCaseSource(typeof(TestCasesData), nameof(TestCasesData.TestCasesForAddition))]
-        public void AdditionOfVector(task_5.Vector lVector, task_5.Vector rVector, task_5.Vector sum)
+        public void Add_Vector_ReturnsVector(task_5.Vector lVector, task_5.Vector rVector, task_5.Vector sum)
         {
             Assert.Multiple(() =>
             {
@@ -38,7 +38,7 @@ namespace Vector.Test
         }
 
         [TestCaseSource(typeof(TestCasesData), nameof(TestCasesData.TestCasesForOperationException))]
-        public void AdditionOneOfVectorIsEqualsNullThrowArgumentNullException(task_5.Vector lVector, task_5.Vector rVector)
+        public void Addition_OneVectorIsEqualsNull_ThrowArgumentNullException(task_5.Vector lVector, task_5.Vector rVector)
         {
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -47,7 +47,7 @@ namespace Vector.Test
         }
 
         [TestCaseSource(typeof(TestCasesData), nameof(TestCasesData.TestCasesForSubtraction))]
-        public void SubtractionOfVector(task_5.Vector lVector, task_5.Vector rVector, task_5.Vector difference)
+        public void Subtraction_Vector_ReturnsVector(task_5.Vector lVector, task_5.Vector rVector, task_5.Vector difference)
         {
             Assert.Multiple(() =>
             {
@@ -57,7 +57,7 @@ namespace Vector.Test
         }
 
         [TestCaseSource(typeof(TestCasesData), nameof(TestCasesData.TestCasesForOperationException))]
-        public void SubtractionOneOfVectorIsEqualsNullThrowArgumentNullException(task_5.Vector lVector, task_5.Vector rVector)
+        public void Subtraction_OneVectorIsEqualsNull_ThrowArgumentNullException(task_5.Vector lVector, task_5.Vector rVector)
         {
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -66,7 +66,7 @@ namespace Vector.Test
         }
 
         [TestCaseSource(typeof(TestCasesData), nameof(TestCasesData.TestCasesForMultiplication))]
-        public void MultiplicationOfVector(task_5.Vector lVector, task_5.Vector rVector, task_5.Vector product)
+        public void Multiplication_Vector_ReturnsVector(task_5.Vector lVector, task_5.Vector rVector, task_5.Vector product)
         {
             Assert.Multiple(() =>
             {
@@ -76,7 +76,7 @@ namespace Vector.Test
         }
         
         [TestCaseSource(typeof(TestCasesData), nameof(TestCasesData.TestCasesForMultiplicationNumber))]
-        public void MultiplicationOfVector(task_5.Vector lVector, float number, task_5.Vector product)
+        public void Multiplication_SingleNumber_ReturnsVector(task_5.Vector lVector, double number, task_5.Vector product)
         {
             Assert.Multiple(() =>
             {
@@ -86,7 +86,7 @@ namespace Vector.Test
         }
 
         [TestCaseSource(typeof(TestCasesData), nameof(TestCasesData.TestCasesForOperationException))]
-        public void MultiplicationOneOfPolynomialsIsEqualsNullThrowArgumentNullException(task_5.Vector lVector, task_5.Vector rVector)
+        public void Multiplication_OneVectorIsEqualsNull_ThrowArgumentNullException(task_5.Vector lVector, task_5.Vector rVector)
         {
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -95,7 +95,7 @@ namespace Vector.Test
         }
 
         [TestCaseSource(typeof(TestCasesData), nameof(TestCasesData.TestCasesForDivisionNumber))]
-        public void DivisionOfVector(task_5.Vector lVector, float number, task_5.Vector product)
+        public void Division_SingleNumber_ReturnsVector(task_5.Vector lVector, double number, task_5.Vector product)
         {
             Assert.Multiple(() =>
             {
@@ -105,7 +105,7 @@ namespace Vector.Test
         }
 
         [TestCaseSource(typeof(TestCasesData), nameof(TestCasesData.TestCasesForOperationExceptionWithOneVector))]
-        public void MultiplicationNullparametrThrowArgumentNullException(task_5.Vector lVector, float number)
+        public void Multiplication_NullVector_ThrowArgumentNullException(task_5.Vector lVector, double number)
         {
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -114,7 +114,7 @@ namespace Vector.Test
         }
 
         [TestCaseSource(typeof(TestCasesData), nameof(TestCasesData.TestCasesForOperationExceptionWithOneVector))]
-        public void DivisionNullparametrThrowArgumentNullException(task_5.Vector lVector, float number)
+        public void Division_NullVector_ThrowArgumentNullException(task_5.Vector lVector, double number)
         {
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -123,7 +123,7 @@ namespace Vector.Test
         }
 
         
-        public void DivisionZeroThrowArgumentException()
+        public void Division_Zero_ThrowArgumentException()
         {
             Assert.Throws<ArgumentException>(() =>
             {
