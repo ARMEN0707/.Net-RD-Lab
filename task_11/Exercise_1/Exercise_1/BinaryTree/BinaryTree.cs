@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
-namespace Zad_1
+
+namespace Exercise_1
 {
     public class BinaryTree<T> : ICollection<T> where T : IComparable<T>
     {
-        private Node<T> root;
+        private Node<T> _root;
 
         public int Count
         {
@@ -16,18 +17,16 @@ namespace Zad_1
         public BinaryTree(IEnumerable<T> list)
         {
             foreach(T item in list)
-            {
                 Add(item);
-            }
         }
 
         public void Add(T item)
         {
-            if (root == null)
-                root = new Node<T>(item);
+            if (_root == null)
+                _root = new Node<T>(item);
             else
             {
-                Node<T> currentNode = root;
+                Node<T> currentNode = _root;
                 Node<T> parent = null;
                 while(currentNode != null)
                 {
@@ -39,7 +38,7 @@ namespace Zad_1
                         currentNode = currentNode.RightNode;
                 }
 
-                if (item.CompareTo(root.Value) < 0)
+                if (item.CompareTo(_root.Value) < 0)
                     parent.LeftNode = new Node<T>(item);
                 else
                     parent.RightNode = new Node<T>(item);
@@ -50,13 +49,13 @@ namespace Zad_1
 
         public void Clear()
         {
-            root = null;
+            _root = null;
             Count = 0;
         }
 
         public bool Contains(T item)
         {
-            Node<T> currentNode = root;
+            Node<T> currentNode = _root;
 
             while (currentNode != null)
             {
@@ -74,7 +73,7 @@ namespace Zad_1
 
         public bool Remove(T item)
         {
-            Node<T> currentNode = root;
+            Node<T> currentNode = _root;
 
             while (currentNode != null)
             {
@@ -95,11 +94,11 @@ namespace Zad_1
 
         public IEnumerator<T> GetEnumerator()
         {
-            if (root == null)
+            if (_root == null)
                 yield break;
 
-            Stack <Node<T>> stack = new Stack<Node<T>>();
-            Node<T> currentNode = root;
+            var stack = new Stack<Node<T>>();
+            Node<T> currentNode = _root;
 
             while (stack.Count > 0 || currentNode != null)
             {
@@ -125,7 +124,7 @@ namespace Zad_1
         public void CopyTo(T[] array, int indexArray)
         {
             if (Count > array.Length - indexArray)
-                throw new ArgumentException();
+                throw new ArgumentException("Invalid array size");
 
             foreach(T item in this)
             {
