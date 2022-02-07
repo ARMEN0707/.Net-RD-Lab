@@ -7,70 +7,68 @@ namespace task_9
 {
     public class Timer
     {
-        public event Action<string, int> StartEvent;
-        public event Action<string> StopEvent;
-        public event Action<string, int> TickEvent;
+        public event EventHandler<TimerEventArgs> StartEvent;
+        public event EventHandler<TimerEventArgs> StopEvent;
+        public event EventHandler<TimerEventArgs> TickEvent;
 
         private string _name;
-        private int _numberTick;
+        private int _numberTicks;
 
         public string Name
         {
             get{ return _name; }
-
             set
             {
                 if (value == null)
-                {
-                    string message = "Name canot be null";
-                    throw new ArgumentException(message);
-                }
+                    throw new ArgumentException("Name can not be null");
 
                 if (value.Length == 0)
-                {
-                    string message = "Name canot be empty";
-                    throw new ArgumentException(message);
-                }
+                    throw new ArgumentException("Name can not be empty");
 
                 _name = value;
             }
         }
-        public int NumberTik
+        public int NumberTicks
         {
-            get { return _numberTick; }
-
+            get { return _numberTicks; }
             set
             {
                 if (value <= 0)
-                {
-                    string message = "NumberTik more that 0";
-                    throw new ArgumentException(message);
-                }
+                    throw new ArgumentException("NumberTik more that 0");
 
-                _numberTick = value;
+                _numberTicks = value;
             }
         }
 
         public Timer(string name, int numberTick)
         {
             Name = name;
-            NumberTik = numberTick;
+            NumberTicks = numberTick;
+        }
+
+        private void OnStartTimer(TimerEventArgs e)
+        {
+            if (!(StartEvent == null || StopEvent == null || TickEvent == null))
+            {
+                StartEvent(this, e);
+                int totalTick = NumberTicks;
+                for (int i = 1; i < totalTick; i++)
+                {
+                    e.NumberTicks -= 1;
+                    TickEvent(this, e);
+                    Thread.Sleep(1000);
+                }
+
+                StopEvent(this, e);
+            }
         }
 
         public void Start()
         {
-            if (!(StartEvent == null || StopEvent == null || TickEvent == null))
-            {
-                StartEvent(Name, NumberTik);
-                int totalTick = NumberTik;
-                for (int i = 1; i < totalTick; i++)
-                {
-                    TickEvent(Name, totalTick - i);
-                    Thread.Sleep(1000);
-                }
-
-                StopEvent(Name);
-            }
+            var timerEventArgs = new TimerEventArgs();
+            timerEventArgs.Name = Name;
+            timerEventArgs.NumberTicks = NumberTicks;
+            OnStartTimer(timerEventArgs);
         }
     }
 }
