@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.IO;
 
-namespace Exercise_1
+namespace task_12
 {
     public class BinaryTree<T> : ICollection<T> where T : IComparable<T>
     {
-        private Node<T> _root;
+        private Node<T> root;
 
         public int Count
         {
@@ -14,19 +15,25 @@ namespace Exercise_1
             private set;
         }
 
+        public BinaryTree()
+        {
+            root = null;
+        }
         public BinaryTree(IEnumerable<T> list)
         {
             foreach(T item in list)
+            {
                 Add(item);
+            }
         }
 
         public void Add(T item)
         {
-            if (_root == null)
-                _root = new Node<T>(item);
+            if (root == null)
+                root = new Node<T>(item);
             else
             {
-                Node<T> currentNode = _root;
+                Node<T> currentNode = root;
                 Node<T> parent = null;
                 while(currentNode != null)
                 {
@@ -38,7 +45,7 @@ namespace Exercise_1
                         currentNode = currentNode.RightNode;
                 }
 
-                if (item.CompareTo(_root.Value) < 0)
+                if (item.CompareTo(root.Value) < 0)
                     parent.LeftNode = new Node<T>(item);
                 else
                     parent.RightNode = new Node<T>(item);
@@ -49,13 +56,13 @@ namespace Exercise_1
 
         public void Clear()
         {
-            _root = null;
+            root = null;
             Count = 0;
         }
 
         public bool Contains(T item)
         {
-            Node<T> currentNode = _root;
+            Node<T> currentNode = root;
 
             while (currentNode != null)
             {
@@ -73,7 +80,7 @@ namespace Exercise_1
 
         public bool Remove(T item)
         {
-            Node<T> currentNode = _root;
+            Node<T> currentNode = root;
 
             while (currentNode != null)
             {
@@ -94,11 +101,11 @@ namespace Exercise_1
 
         public IEnumerator<T> GetEnumerator()
         {
-            if (_root == null)
+            if (root == null)
                 yield break;
 
             var stack = new Stack<Node<T>>();
-            Node<T> currentNode = _root;
+            Node<T> currentNode = root;
 
             while (stack.Count > 0 || currentNode != null)
             {
@@ -124,7 +131,7 @@ namespace Exercise_1
         public void CopyTo(T[] array, int indexArray)
         {
             if (Count > array.Length - indexArray)
-                throw new ArgumentException("Invalid array size");
+                throw new ArgumentException("Invalid size array");
 
             foreach(T item in this)
             {

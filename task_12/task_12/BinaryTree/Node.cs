@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Exercise_1
+namespace task_12
 {
     public class Node<T>
     {
