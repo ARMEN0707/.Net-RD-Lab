@@ -9,7 +9,7 @@ namespace task_12
     
     public class WorkDataTree
     {
-        public BinaryTree<Student> _tree;
+        private BinaryTree<Student> _tree;
 
         public WorkDataTree(BinaryTree<Student> tree)
         {
@@ -25,7 +25,7 @@ namespace task_12
 
         public void WriteInBinaryFile(string path)
         {
-            using (BinaryWriter binaryWriter = new BinaryWriter(File.Open(path, FileMode.Create)))
+            using (var binaryWriter = new BinaryWriter(File.Open(path, FileMode.Create)))
             {
                 foreach (Student item in _tree)
                 {
@@ -39,7 +39,7 @@ namespace task_12
 
         public void ReadBinaryFile(string path)
         {
-            using (BinaryReader binaryReader = new BinaryReader(File.Open(path, FileMode.OpenOrCreate)))
+            using (var binaryReader = new BinaryReader(File.Open(path, FileMode.OpenOrCreate)))
             {
                 _tree.Clear();
                 while (binaryReader.PeekChar() != -1)
@@ -107,7 +107,7 @@ namespace task_12
                     selectedStudents = _tree.Where(s => s.Test == value);
                     break;
                 case Field.dateTest:
-                    DateTime data = DateTime.ParseExact(value, "d", System.Globalization.CultureInfo.CurrentCulture);
+                    var data = DateTime.ParseExact(value, "d", System.Globalization.CultureInfo.CurrentCulture);
                     selectedStudents = _tree.Where(s => s.DateTest == data);
                     break;
                 case Field.mark:

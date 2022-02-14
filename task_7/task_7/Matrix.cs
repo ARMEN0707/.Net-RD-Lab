@@ -6,7 +6,7 @@ namespace task_7
 {
     public class Matrix
     {
-        public static double s_epsilon = 0.000001f;
+        private const double s_epsilon = 0.000001f;
         private double[,] _elements;
         public int Row { get; }
         public int Column { get; }
@@ -33,18 +33,58 @@ namespace task_7
         {
             get
             {
-                if (row < 0 || column < 0 || row >= Row || column >= Column || Row == 0 || Column == 0)
-                    throw new ArgumentOutOfRangeException("Index is not a valid");
+                CheckIndex(row, column);
 
                 return _elements[row, column];
             }
             set
             {
-                if (row < 0 || column < 0 || row >= Row || column >= Column || Row == 0 || Column == 0)
-                    throw new ArgumentOutOfRangeException("Index is not a valid");
+                CheckIndex(row, column);
 
                 _elements[row, column] = value;
             }
+        }
+
+        private void CheckIndex(int row, int column)
+        {
+            if (row < 0 || column < 0 || row >= Row || column >= Column || Row == 0 || Column == 0)
+                throw new ArgumentOutOfRangeException("Index is not a valid");
+        }
+
+        private static void CheckMatrix(Matrix firstMatrix, Matrix secondMatrix)
+        {
+            if (firstMatrix == null || secondMatrix == null)
+                throw new ArgumentNullException("Matrix is not null");
+            if ((firstMatrix.Row != secondMatrix.Row) || (firstMatrix.Column != secondMatrix.Column))
+                throw new ArgumentException("Matrix different rang.");
+        }
+
+        private static void CheckMatrix(Matrix matrix)
+        {
+            if (matrix == null)
+                throw new ArgumentNullException("Matrix is not null");
+        }
+
+        private static Matrix CalculateMatrix(Matrix firstMatrix, Matrix secondMatrix, Action<double[], int, int, int> calculate, bool forOneMatrix = false)
+        {
+            if(forOneMatrix)
+                CheckMatrix(firstMatrix);
+            else
+                CheckMatrix(firstMatrix, secondMatrix);
+
+            double[] newMatrix = new double[firstMatrix.Row * firstMatrix.Column];
+
+            int indexNewMatrix = 0;
+            for (int i = 0; i < firstMatrix.Row; i++)
+            {
+                for (int j = 0; j < firstMatrix.Column; j++)
+                {
+                    calculate(newMatrix, indexNewMatrix, i, j);
+                    indexNewMatrix++;
+                }
+            }
+
+            return new Matrix(firstMatrix.Row, firstMatrix.Column, newMatrix);
         }
 
         public override string ToString()
@@ -63,90 +103,48 @@ namespace task_7
 
         public static Matrix operator +(Matrix lMatrix, Matrix rMatrix)
         {
-            if (lMatrix == null || rMatrix == null)
-                throw new ArgumentNullException("Matrix is not null");
-            if ((lMatrix.Row != rMatrix.Row) || (lMatrix.Column != rMatrix.Column))
-                throw new ArgumentException("Matrix different rang.");
-
-            double[] newMatrix = new double[lMatrix.Row * lMatrix.Column];
-
-            int indexNewMatrix = 0;
-            for (int i = 0; i < lMatrix.Row; i++)
-            {
-                for (int j = 0; j < lMatrix.Column; j++)
-                {
-                    newMatrix[indexNewMatrix] = lMatrix[i, j] + rMatrix[i, j];
-                    indexNewMatrix++;
-                }
-            }
-
-            return new Matrix(lMatrix.Row, lMatrix.Column, newMatrix);
+            return CalculateMatrix(
+                lMatrix,
+                rMatrix,
+                (numbers, index, indexRow, indexColumn) 
+                    => numbers[index] = lMatrix[indexRow, indexColumn] + rMatrix[indexRow, indexColumn]
+                );
         }
 
         public static Matrix operator -(Matrix lMatrix, Matrix rMatrix)
         {
-            if (lMatrix == null || rMatrix == null)
-                throw new ArgumentNullException("Matrix is not null");
-            if ((lMatrix.Row != rMatrix.Row) || (lMatrix.Column != rMatrix.Column))
-                throw new ArgumentException("Matrix different rang.");
-
-            double[] newMatrix = new double[lMatrix.Row * lMatrix.Column];
-
-            int indexNewMatrix = 0;
-            for (int i = 0; i < lMatrix.Row; i++)
-            {
-                for (int j = 0; j < lMatrix.Column; j++)
-                {
-                    newMatrix[indexNewMatrix] = lMatrix[i, j] - rMatrix[i, j];
-                    indexNewMatrix++;
-                }
-            }
-
-            return new Matrix(lMatrix.Row, lMatrix.Column, newMatrix);
+            return CalculateMatrix(
+                lMatrix,
+                rMatrix,
+                (numbers, index, indexRow, indexColumn)
+                    => numbers[index] = lMatrix[indexRow, indexColumn] - rMatrix[indexRow, indexColumn]
+                );
         }
 
         public static Matrix operator *(Matrix lMatrix, Matrix rMatrix)
         {
-            if (lMatrix == null || rMatrix == null)
-                throw new ArgumentNullException("Matrix is not null");
-            if ((lMatrix.Row != rMatrix.Row) || (lMatrix.Column != rMatrix.Column))
-                throw new ArgumentException("Matrix different rang.");
-
-            double[] newMatrix = new double[lMatrix.Row * lMatrix.Column];
-
-            int indexNewMatrix = 0;
-            for (int i = 0; i < lMatrix.Row; i++)
-            {
-                for (int j = 0; j < lMatrix.Column; j++)
-                {
-                    for (int x = 0; x < lMatrix.Row; x++)
+            return CalculateMatrix(
+                lMatrix,
+                rMatrix,
+                (numbers, index, indexRow, indexColumn) =>
                     {
-                        newMatrix[indexNewMatrix] += lMatrix[i, x] * rMatrix[x, j];
+                        for (int x = 0; x < lMatrix.Row; x++)
+                        {
+                            numbers[index] += lMatrix[indexRow, x] * rMatrix[x, indexColumn];
+                        }
                     }
-                    indexNewMatrix++;
-                }
-            }
-
-            return new Matrix(lMatrix.Row, lMatrix.Column, newMatrix);
+                );
         }
 
         public static Matrix operator *(Matrix lMatrix, double number)
         {
-            if (lMatrix == null)
-                throw new ArgumentNullException("Matrix is not null");
-
-            double[] newMatrix = new double[lMatrix.Row * lMatrix.Column];
-            int indexNewMatrix = 0;
-            for (int i = 0; i < lMatrix.Row; i++)
-            {
-                for (int j = 0; j < lMatrix.Column; j++)
-                {
-                    newMatrix[indexNewMatrix] += lMatrix[i, j] * number;
-                    indexNewMatrix++;
-                }
-            }
-
-            return new Matrix(lMatrix.Row, lMatrix.Column, newMatrix);
+            return CalculateMatrix(
+                lMatrix,
+                null,
+                (numbers, index, indexRow, indexColumn)
+                    => numbers[index] = lMatrix[indexRow, indexColumn] * number,
+                true
+                );
         }
 
         public static bool operator ==(Matrix lMatrix, Matrix rMatrix)

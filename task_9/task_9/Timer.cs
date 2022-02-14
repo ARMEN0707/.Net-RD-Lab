@@ -65,9 +65,7 @@ namespace task_9
 
         public void Start()
         {
-            var timerEventArgs = new TimerEventArgs();
-            timerEventArgs.Name = Name;
-            timerEventArgs.NumberTicks = NumberTicks;
+            var timerEventArgs = new TimerEventArgs(Name, NumberTicks);
             OnStartTimer(timerEventArgs);
         }
     }

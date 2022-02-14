@@ -219,6 +219,11 @@ namespace Polynomial
             return this == other;
         }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public override string ToString()
         {
             string text = "";

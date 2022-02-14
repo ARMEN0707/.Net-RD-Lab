@@ -22,30 +22,26 @@ namespace Exercise_1
 
         public void Add(T item)
         {
-            if (_root == null)
-                _root = new Node<T>(item);
-            else
-            {
-                Node<T> currentNode = _root;
-                Node<T> parent = null;
-                while(currentNode != null)
-                {
-                    parent = currentNode;
-
-                    if (item.CompareTo(currentNode.Value) < 0)
-                        currentNode = currentNode.LeftNode;
-                    else
-                        currentNode = currentNode.RightNode;
-                }
-
-                if (item.CompareTo(_root.Value) < 0)
-                    parent.LeftNode = new Node<T>(item);
-                else
-                    parent.RightNode = new Node<T>(item);
-            }
-
+            _root = Add(_root, item);
             Count++;
         }
+        private Node<T> Add(Node<T> root, T item)
+        {
+            if (root == null)
+            {
+                root = new Node<T>(item);
+                return root;
+            }
+            else
+            {
+                if (item.CompareTo(root.Value) < 0)
+                    root.LeftNode = Add(root.LeftNode, item);
+                else
+                    root.RightNode = Add(root.RightNode, item);
+            }
+
+            return root;
+        }        
 
         public void Clear()
         {
@@ -55,41 +51,61 @@ namespace Exercise_1
 
         public bool Contains(T item)
         {
-            Node<T> currentNode = _root;
+            return Contains(_root, item);
+        }
 
-            while (currentNode != null)
-            {
-                if (item.CompareTo(currentNode.Value) < 0)
-                    currentNode = currentNode.LeftNode;
-                else if (item.CompareTo(currentNode.Value) > 0)
-                    currentNode = currentNode.RightNode;
-                else
-                    return true;
-            }
+        private bool Contains(Node<T> root, T item)
+        {
+            if (item.CompareTo(root.Value) == 0)
+                return true;
+            if (item.CompareTo(root.Value) < 0)
+                return Contains(root.LeftNode, item);
+            if (item.CompareTo(root.Value) > 0)
+                return Contains(root.RightNode, item);
 
             return false;
         }
 
-
         public bool Remove(T item)
         {
-            Node<T> currentNode = _root;
+            int count = Count;
+            _root = Remove(_root, item);
+            if(count > Count)
+                return true;
+            else
+                return false;
+        }
 
-            while (currentNode != null)
+        private Node<T> Remove(Node<T> root, T item)
+        {
+            if (root == null)
+                return root;
+
+            if (item.CompareTo(root.Value) < 0)
+                root.LeftNode = Remove(root.LeftNode, item);
+            else if(item.CompareTo(root.Value) > 0)
+                root.RightNode = Remove(root.RightNode, item);
+            else
             {
-                if (item.CompareTo(currentNode.Value) < 0)
-                    currentNode = currentNode.LeftNode;
-                else if (item.CompareTo(currentNode.Value) > 0)
-                    currentNode = currentNode.RightNode;
-                else
-                {
-                    currentNode.Value = currentNode.RightNode.Value;
-                    currentNode.LeftNode = currentNode.RightNode.LeftNode;
-                    currentNode.RightNode = currentNode.RightNode.RightNode;
-                    return true;
-                }
+                Count--;
+                if (root.LeftNode == null)
+                    return root.RightNode;
+                else if (root.RightNode == null)
+                    return root.LeftNode;
+
+                root.Value = MinValue(root.RightNode);
+                root.RightNode = Remove(root.RightNode, root.Value);
             }
-            return false;
+
+            return root;
+        }
+
+        private T MinValue(Node<T> root)
+        {
+            if (root.LeftNode == null)
+                return root.Value;
+            else
+                return MinValue(root.LeftNode);
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -126,7 +142,7 @@ namespace Exercise_1
             if (Count > array.Length - indexArray)
                 throw new ArgumentException("Invalid array size");
 
-            foreach(T item in this)
+            foreach (T item in this)
             {
                 array[indexArray] = item;
                 indexArray++;

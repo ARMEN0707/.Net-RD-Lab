@@ -6,9 +6,9 @@ namespace task_5
 {
     public class Vector
     {
-        public double AxisX;
-        public double AxisY;
-        public double AxisZ;
+        public double AxisX { get; }
+        public double AxisY { get; }
+        public double AxisZ { get; }
 
         public static Vector UnitX
         {
@@ -40,7 +40,7 @@ namespace task_5
             AxisX = axisX;
             AxisY = axisY;
             AxisZ = axisZ;
-        }
+        }       
 
         public static bool operator ==(Vector leftVector, Vector rightVector)
         {
@@ -67,8 +67,7 @@ namespace task_5
 
         public static Vector operator +(Vector leftVector, Vector rightVector)
         {
-            if (leftVector == null || rightVector == null)
-                throw new ArgumentNullException("Vector cannot be null");
+            CheckVector(leftVector, rightVector);
 
             return new Vector(
                 leftVector.AxisX + rightVector.AxisX,
@@ -79,8 +78,7 @@ namespace task_5
 
         public static Vector operator -(Vector leftVector, Vector rightVector)
         {
-            if (leftVector == null || rightVector == null)
-                throw new ArgumentNullException("Vector cannot be null");
+            CheckVector(leftVector, rightVector);
 
             return new Vector(
                 leftVector.AxisX - rightVector.AxisX,
@@ -91,8 +89,7 @@ namespace task_5
 
         public static Vector operator *(Vector leftVector, Vector rightVector)
         {
-            if (leftVector == null || rightVector == null)
-                throw new ArgumentNullException("Vector cannot be null");
+            CheckVector(leftVector, rightVector);
 
             return new Vector(
                 leftVector.AxisY * rightVector.AxisZ - leftVector.AxisZ * rightVector.AxisY,
@@ -103,8 +100,7 @@ namespace task_5
 
         public static Vector operator *(Vector leftVector, double number)
         {
-            if (leftVector == null)
-                throw new ArgumentNullException("Vector cannot be null");
+            CheckVector(leftVector);
 
             return new Vector(
                 leftVector.AxisX * number,
@@ -115,8 +111,7 @@ namespace task_5
 
         public static Vector operator /(Vector leftVector, double number)
         {
-            if (leftVector == null)
-                throw new ArgumentNullException("Vector cannot be null");
+            CheckVector(leftVector);
             if (number == 0)
                 throw new ArgumentException("Division by zero.");
 
@@ -170,6 +165,18 @@ namespace task_5
         public override string ToString()
         {
             return $"X:{AxisX} Y:{AxisY} Z:{AxisZ}";
+        }
+
+        private static void CheckVector(Vector firstVector, Vector secondVectro)
+        {
+            if (firstVector == null || secondVectro == null)
+                throw new ArgumentNullException("Vector cannot be null");
+        }
+
+        private static void CheckVector(Vector vector)
+        {
+            if (vector == null)
+                throw new ArgumentNullException("Vector cannot be null");
         }
     }
 }

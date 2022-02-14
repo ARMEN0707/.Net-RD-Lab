@@ -28,6 +28,8 @@ namespace Exercise_1
 
             var intTree = new BinaryTree<int>(intList);
 
+            intTree.Remove(5);
+
             foreach (int item in intTree)
                 Console.WriteLine(item);
         }

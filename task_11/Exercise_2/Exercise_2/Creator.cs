@@ -4,8 +4,8 @@ namespace Exercise_2
 {
     public class Creator
     {
-        public IHerbivore Herbivore;
-        public ICarnivore Carnivore;
+        public IHerbivore Herbivore { get; }
+        public ICarnivore Carnivore { get; }
 
         public Creator(ICountryFactory factory)
         {

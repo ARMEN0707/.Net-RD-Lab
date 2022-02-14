@@ -3,7 +3,7 @@ namespace Polynomial
 {
     public class Monomial
     {
-        public const double Epsilon = 0.00001;
+        private const double Epsilon = 0.00001;
         public int Degree { get; set; }
         public double Coefficient { get; set; }
 
@@ -73,6 +73,11 @@ namespace Polynomial
             }
 
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
 
         public override string ToString()

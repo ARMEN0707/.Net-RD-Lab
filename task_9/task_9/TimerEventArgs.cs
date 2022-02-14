@@ -8,7 +8,21 @@ namespace task_9
 {
     public class TimerEventArgs : EventArgs
     {
-        public string Name;
-        public int NumberTicks;
+        private int _numberTticks;
+        public string Name { get; }
+        public int NumberTicks {
+            get { return _numberTticks; } 
+            set
+            {
+                if(value < 0) _numberTticks = 0;
+                if(value > _numberTticks) return;
+            }
+        }
+
+        public TimerEventArgs(string name, int numberTicks)
+        {
+            Name = name;
+            NumberTicks = numberTicks;
+        }
     }
 }
