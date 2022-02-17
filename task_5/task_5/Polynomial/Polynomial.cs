@@ -64,8 +64,6 @@ namespace Polynomial
                     throw new ArgumentOutOfRangeException("index is not a valid");
             }
         }
-        //5*x^2+6*x^4
-        //4+5*x+3*x^2
 
         private static Polynomial CalculatePolynomial(Polynomial leftPolynimial, Polynomial rightPolynimial, Func<Monomial, Monomial, Monomial> calculate, Action<List<Monomial>, Monomial> addMonomial = null)
         {
